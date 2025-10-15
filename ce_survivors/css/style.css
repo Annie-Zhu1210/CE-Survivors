@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f6f6f6;
+}
+
+/* navigation */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #002b5b;
+  color: white;
+  padding: 10px 20px;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  position: relative;
+}
+
+.menu ul {
+  position: absolute;
+  right: 0;
+  background: white;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.menu ul li {
+  margin: 5px 0;
+}
+
+.menu ul li a {
+  color: #002b5b;
+  text-decoration: none;
+}
+
+.hidden {
+  display: none;
+}
+
+/* main */
+.home-container {
+  display: flex;
+  height: calc(100vh - 70px);
+}
+
+.scroll-panel {
+  flex: 2;
+  background: white;
+  overflow: hidden;
+  padding: 20px;
+}
+
+#scrollContent {
+  animation: scrollUp 10s linear infinite;
+}
+
+@keyframes scrollUp {
+  from {transform: translateY(0);}
+  to {transform: translateY(-50%);}
+}
+
+.try-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.try-btn {
+  background: #002b5b;
+  color: white;
+  font-size: 20px;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.try-btn:hover {
+  background: #014f86;
+}

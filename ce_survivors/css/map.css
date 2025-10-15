@@ -1,0 +1,46 @@
+body { font-family: Arial; margin: 0; background: #f5f5f5; }
+
+header {
+  background: #002b5b; color: white; padding: 10px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.back-btn { color: white; text-decoration: none; }
+
+.map-container {
+  display: flex; padding: 20px;
+}
+
+.map-box {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.borough {
+  background: #ccc;
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.borough.red { background: #e74c3c; color: white; }
+.borough.yellow { background: #f1c40f; color: black; }
+.borough.green { background: #27ae60; color: white; }
+
+.info-box {
+  flex: 1;
+  margin-left: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.dot {
+  height: 12px; width: 12px; border-radius: 50%; display: inline-block;
+}
+.dot.red { background: #e74c3c; }
+.dot.yellow { background: #f1c40f; }
+.dot.green { background: #27ae60; }

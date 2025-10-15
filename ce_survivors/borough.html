@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Borough Detail</title>
+  <link rel="stylesheet" href="css/map.css">
+  <script defer src="js/borough.js"></script>
+</head>
+<body>
+  <header>
+    <a href="map.html" class="back-btn">← Back</a>
+    <h2 id="boroughTitle"></h2>
+  </header>
+
+  <main class="map-container">
+    <aside class="info-box">
+      <br><label>Location:</label>
+      <select id="locationSelect"></select>
+      <br><label>Time:</label>
+      <select id="timeSelect"></select>
+      <br><label>Crime Type:</label>
+      <select id="crimeSelect"></select>
+      <br><button id="saveBtn">Save</button>
+    </aside>
+
+    <div id="displayArea" class="map-box" style="justify-content:center;align-items:center;">
+      <p>Loading Line Chart...</p>
+    </div>
+  </main>
+</body>
+</html>

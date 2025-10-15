@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CrimeMap London</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-section">
+      <img src="images/20230217120759_a33ae.jpg" alt="logo" class="logo">
+      <h1>CrimeMap London</h1>
+    </div>
+    <nav class="menu">
+      <button id="menuBtn">☰ Menu</button>
+      <ul id="menuList" class="hidden">
+        <li><a href="about.html">About</a></li>
+        <li><a href="more.html">More</a></li>
+        <li><a href="tbd.html">TBD</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="home-container">
+    <section class="scroll-panel">
+      <div id="scrollContent">
+        <!-- animation -->
+        <p>Loading London Borough Crime Data...</p>
+        <p>Camden: +12% incidents</p>
+        <p>Westminster: -4% incidents</p>
+        <p>Hackney: +8% incidents</p>
+        <p>...</p>
+      </div>
+    </section>
+    <section class="try-panel">
+      <button onclick="window.location.href='map.html'" class="try-btn">Try it now →</button>
+    </section>
+  </main>
+</body>
+</html>
+
+
