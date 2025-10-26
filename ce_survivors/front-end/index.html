@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CrimeMap London — Home</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Header will be injected by nav.js -->
+  <div id="header"></div>
+
+  <main class="container">
+    <section class="left-panel">
+      <h2 class="panel-title">Latest borough counts</h2>
+      <div id="card-stack" class="card-stack" aria-live="polite" aria-atomic="true"></div>
+    </section>
+
+    <aside class="right-panel">
+      <button id="tryBtn" class="try-btn" onclick="location.href='/map.html'">Try it now →</button>
+    </aside>
+  </main>
+
+  <script src="/js/nav.js" defer></script>
+  <script src="/js/carousel.js" defer></script>
+</body>
+</html>

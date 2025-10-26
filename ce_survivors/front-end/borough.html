@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Borough Detail - CrimeMap London</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="map-container">
+    <aside class="info-box">
+      <h3 id="boroughTitle">Borough</h3>
+
+      <label for="locationSelect">Location (street / area):</label>
+      <select id="locationSelect"></select>
+
+      <label for="timeSelect">Time (month):</label>
+      <select id="timeSelect"></select>
+
+      <label for="crimeSelect">Crime Type:</label>
+      <select id="crimeSelect"></select>
+
+      <button id="saveBtn">Save</button>
+    </aside>
+
+    <div id="displayArea" class="map-box" aria-live="polite">
+      <p id="displayMsg">Loading data...</p>
+    </div>
+  </main>
+
+  <script src="/js/nav.js" defer></script>
+  <script src="/js/borough.js" defer></script>
+</body>
+</html>

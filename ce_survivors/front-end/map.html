@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Map Page - CrimeMap London</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="map-container">
+    <div id="londonMap" class="map-box" aria-label="London boroughs map placeholder">
+      <!-- For now we use clickable borough chips that simulate map interaction -->
+      <div class="borough red" data-borough="Camden">Camden</div>
+      <div class="borough yellow" data-borough="Hackney">Hackney</div>
+      <div class="borough green" data-borough="Westminster">Westminster</div>
+      <div class="borough red" data-borough="Tower Hamlets">Tower Hamlets</div>
+      <div class="borough green" data-borough="Islington">Islington</div>
+      <div class="borough yellow" data-borough="Kensington & Chelsea">Kensington & Chelsea</div>
+    </div>
+
+    <aside class="info-box">
+      <h3>Borough Security Levels in Crime Counts</h3>
+      <ul>
+        <li><span class="dot red"></span> Higher than <strong>5000</strong></li>
+        <li><span class="dot yellow"></span> Between <strong>3000 and 5000</strong></li>
+        <li><span class="dot green"></span> Less than <strong>3000</strong></li>
+      </ul>
+      <p style="margin-top:12px;color:var(--muted)">Click a borough to view details.</p>
+    </aside>
+  </main>
+
+  <script src="/js/nav.js" defer></script>
+  <script src="/js/map.js" defer></script>
+</body>
+</html>

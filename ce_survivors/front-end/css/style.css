@@ -1,0 +1,235 @@
+/* style.css - global styles, header, carousel, map placeholders */
+
+/* Root colors */
+:root{
+  --brand: #002b5b;   /* deep blue */
+  --accent: #014f86;  /* accent blue */
+  --highlight: #014f86; /* active left bar color */
+  --card-bg: #ffffff;
+  --muted: #6b7280;
+  --shadow: 0 6px 18px rgba(3,10,30,0.15);
+}
+
+/* Basic reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  background: #f4f6f8;
+  color: #0b1220;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------- Header ---------------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: var(--brand);
+  color: white;
+}
+.logo-section { display: flex; align-items: center; gap: 12px; }
+.logo { height: 38px; border-radius: 6px; }
+.site-name { font-weight: 600; font-size: 18px; color: white; }
+
+/* Navigation */
+.site-nav { position: relative; }
+.menu-toggle {
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+}
+.menu-list {
+  position: absolute;
+  right: 0;
+  top: 46px;
+  background: white;
+  color: var(--brand);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  list-style: none;
+  padding: 8px 6px;
+  min-width: 180px;
+}
+.menu-list.hidden { display: none; }
+.menu-list li { padding: 6px 12px; }
+.menu-list li a {
+  color: var(--brand);
+  text-decoration: none;
+  display: block;
+  padding: 6px 4px;
+  border-left: 3px solid transparent; /* for active left bar */
+}
+
+/* Active style (A): left 3px highlight */
+.menu-list li a.active {
+  color: var(--highlight);
+  border-left-color: var(--highlight);
+  font-weight: 700;
+}
+
+/* ---------------- Layout ---------------- */
+.container {
+  display: flex;
+  gap: 24px;
+  padding: 28px;
+  height: calc(100vh - 72px); /* header 72 px */
+}
+
+/* Left panel (carousel) */
+.left-panel {
+  flex: 2;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.panel-title {
+  width: 100%;
+  margin-bottom: 12px;
+  color: var(--brand);
+  font-size: 20px;
+  font-weight: 700;
+  padding-left: 8px;
+}
+
+/* Card stack area */
+.card-stack {
+  width: 100%;
+  max-width: 720px;
+  height: 420px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card base style */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 640px;
+  height: 360px;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: linear-gradient(180deg, #ffffff, #fafafd);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* card inner text */
+.card .card-inner { text-align: center; width: 100%; }
+.card .borough {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--brand);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.card .count {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--accent);
+  margin-top: 10px;
+}
+
+/* small message */
+.card .msg { font-size: 16px; color: var(--muted); }
+
+/* Right panel */
+.right-panel {
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.try-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(1,30,60,0.12);
+}
+
+/* ---------------- Map and borough layout ---------------- */
+.map-container {
+  display: flex;
+  gap: 24px;
+  padding: 28px;
+}
+.map-box {
+  flex: 2;
+  background: #e9eef5;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  min-height: 420px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.info-box {
+  flex: 1;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+/* borough chips */
+.borough {
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 6px;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+}
+.borough.red { background: #d32f2f; }
+.borough.yellow { background: #fbc02d; color: #222; }
+.borough.green { background: #388e3c; }
+
+/* info-box bullets */
+.info-box ul { margin-top: 12px; }
+.info-box li { margin: 8px 0; color: var(--muted); font-size: 15px; }
+.info-box .dot { display: inline-block; width:12px; height:12px; border-radius:50%; margin-right:8px; vertical-align:middle; }
+
+/* form selects on borough page */
+.info-box label { display:block; margin-top: 8px; color:var(--muted); font-weight:600; }
+.info-box select, .info-box button {
+  width:100%;
+  margin-top:6px;
+  padding:8px 10px;
+  border-radius:6px;
+  border:1px solid #ddd;
+}
+
+/* small utilities */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* responsive */
+@media (max-width: 900px) {
+  .container, .map-container { flex-direction: column; height: auto; padding: 16px; }
+  .right-panel { width: 100%; order: 3; margin-top: 12px; justify-content: center; }
+  .card { width: 92%; height: 260px; }
+}
