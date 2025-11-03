@@ -1,6 +1,6 @@
 // map.js
-// Handle clicks on borough chips and navigate to borough detail page
-// Save selected borough name to localStorage so borough.html can read it
+// Handle clicks on borough shapes and navigate to the statistics page
+// Save selected borough name to localStorage so more.html can preselect it
 
 document.addEventListener('DOMContentLoaded', () => {
   const mapContainer = document.getElementById('londonMap');
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
       console.warn('localStorage not available', e);
     }
-    window.location.href = '/borough.html';
+    window.location.href = '/more.html';
   };
 
   mapContainer.addEventListener('click', (ev) => {
