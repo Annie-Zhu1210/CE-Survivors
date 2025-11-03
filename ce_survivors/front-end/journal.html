@@ -2,96 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Journal - CrimeMap London</title>
+  <title>Journal - SafeCity London</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Global site styles -->
+  <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="/css/style.css">
-  
-  <style>
-    
-    body {
-      background-color: #f8f9fa;
-    }
-    
-    main {
-      padding: 28px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    
-    
-    .section {
-      background: white;
-      border-radius: 10px;
-      padding: 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease;
-    }
-    
-    .section:hover {
-      transform: translateY(-5px);
-    }
-    
-    .section-title {
-      color: #2c3e50;
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid #3498db;
-      display: inline-block;
-      font-size: 1.8rem;
-    }
-    
-    .version-timeline {
-      border-left: 3px solid #3498db;
-      padding-left: 30px;
-      margin: 30px 0;
-      position: relative;
-    }
-    
-    .version-item {
-      background: white;
-      padding: 25px;
-      margin-bottom: 25px;
-      border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-      position: relative;
-    }
-    
-    .version-item:before {
-      content: '';
-      position: absolute;
-      left: -36px;
-      top: 30px;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background: #3498db;
-      border: 3px solid white;
-      box-shadow: 0 0 0 3px #3498db;
-    }
-    
-    .back-home {
-      display: inline-block;
-      margin-top: 30px;
-      color: #3498db;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    
-    .back-home:hover {
-      color: #2c3e50;
-    }
-  </style>
+
+  <!-- Page-specific styles -->
+  <link rel="stylesheet" href="/css/journal.css">
 </head>
 <body>
+  <!-- Header will be injected dynamically -->
   <div id="header"></div>
 
   <main>
     <h2 style="color: #2c3e50; margin-bottom: 20px;">Journal</h2>
     <p style="margin-bottom: 30px; color: #666;">Project updates and version history.</p>
-    
-    
+
     <section class="section">
       <h2 class="section-title">Version History</h2>
       <div class="version-timeline">
@@ -105,7 +33,7 @@
         </div>
       </div>
     </section>
-    
+
     <a href="/index.html" class="back-home">← Back to Home</a>
   </main>
 

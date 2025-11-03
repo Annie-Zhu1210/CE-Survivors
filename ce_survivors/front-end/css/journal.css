@@ -1,0 +1,82 @@
+/* journal.css — styles specific to journal.html */
+
+/* General page styling */
+body {
+  background-color: #f8f9fa;
+}
+
+/* Main layout */
+main {
+  padding: 28px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Section containers */
+.section {
+  background: white;
+  border-radius: 10px;
+  padding: 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+}
+
+/* Section titles */
+.section-title {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #3498db;
+  display: inline-block;
+  font-size: 1.8rem;
+}
+
+/* Version timeline styling */
+.version-timeline {
+  border-left: 3px solid #3498db;
+  padding-left: 30px;
+  margin: 30px 0;
+  position: relative;
+}
+
+/* Version items */
+.version-item {
+  background: white;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.version-item::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 30px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #3498db;
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px #3498db;
+}
+
+/* Back to home link */
+.back-home {
+  display: inline-block;
+  margin-top: 30px;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.back-home:hover {
+  color: #2c3e50;
+}

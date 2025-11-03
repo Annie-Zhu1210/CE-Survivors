@@ -1,7 +1,5 @@
-/* style.css - global styles, header, carousel, map placeholders */
-
-/* Root colors */
-:root{
+/* style.css - Global styles for CrimeMap London */
+:root {
   --brand: #002b5b;   /* deep blue */
   --accent: #014f86;  /* accent blue */
   --highlight: #014f86; /* active left bar color */
@@ -11,8 +9,16 @@
 }
 
 /* Basic reset */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html, body { 
+  height: 100%; 
+}
+
 body {
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   background: #f4f6f8;
@@ -20,56 +26,121 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ---------------- Header ---------------- */
+/* ---------------- Enhanced Header ---------------- */
 .site-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 20px;
-  background: var(--brand);
-  color: white;
-}
-.logo-section { display: flex; align-items: center; gap: 12px; }
-.logo { height: 38px; border-radius: 6px; }
-.site-name { font-weight: 600; font-size: 18px; color: white; }
-
-/* Navigation */
-.site-nav { position: relative; }
-.menu-toggle {
-  background: transparent;
-  border: 0;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 6px;
-}
-.menu-list {
-  position: absolute;
-  right: 0;
-  top: 46px;
-  background: white;
-  color: var(--brand);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  list-style: none;
-  padding: 8px 6px;
-  min-width: 180px;
-}
-.menu-list.hidden { display: none; }
-.menu-list li { padding: 6px 12px; }
-.menu-list li a {
-  color: var(--brand);
-  text-decoration: none;
-  display: block;
-  padding: 6px 4px;
-  border-left: 3px solid transparent; /* for active left bar */
 }
 
-/* Active style (A): left 3px highlight */
-.menu-list li a.active {
-  color: var(--highlight);
-  border-left-color: var(--highlight);
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.logo-section:hover {
+  transform: translateX(5px);
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.site-name {
+  font-size: 1.8rem;
   font-weight: 700;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+.site-nav {
+  position: relative;
+}
+
+.menu-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.menu-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.menu-list li {
+  position: relative;
+}
+
+.menu-list a {
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-list a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.menu-list a:hover::before {
+  left: 100%;
+}
+
+.menu-list a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Active style with left border highlight */
+.menu-list a.active {
+  color: var(--highlight);
+  border-left: 3px solid var(--highlight);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
 }
 
 /* ---------------- Layout ---------------- */
@@ -93,6 +164,7 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 .panel-title {
   width: 100%;
   margin-bottom: 12px;
@@ -133,7 +205,11 @@ body {
 }
 
 /* card inner text */
-.card .card-inner { text-align: center; width: 100%; }
+.card .card-inner { 
+  text-align: center; 
+  width: 100%; 
+}
+
 .card .borough {
   font-size: 28px;
   font-weight: 800;
@@ -141,6 +217,7 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
 .card .count {
   font-size: 40px;
   font-weight: 900;
@@ -149,7 +226,10 @@ body {
 }
 
 /* small message */
-.card .msg { font-size: 16px; color: var(--muted); }
+.card .msg { 
+  font-size: 16px; 
+  color: var(--muted); 
+}
 
 /* Right panel */
 .right-panel {
@@ -158,6 +238,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .try-btn {
   background: var(--accent);
   color: white;
@@ -175,6 +256,7 @@ body {
   gap: 24px;
   padding: 28px;
 }
+
 .map-box {
   flex: 2;
   background: #e9eef5;
@@ -187,6 +269,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .info-box {
   flex: 1;
   background: var(--card-bg);
@@ -204,6 +287,7 @@ body {
   color: white;
   font-weight: 700;
 }
+
 .borough.red { background: #d32f2f; }
 .borough.yellow { background: #fbc02d; color: #222; }
 .borough.green { background: #388e3c; }
@@ -211,10 +295,23 @@ body {
 /* info-box bullets */
 .info-box ul { margin-top: 12px; }
 .info-box li { margin: 8px 0; color: var(--muted); font-size: 15px; }
-.info-box .dot { display: inline-block; width:12px; height:12px; border-radius:50%; margin-right:8px; vertical-align:middle; }
+.info-box .dot { 
+  display: inline-block; 
+  width:12px; 
+  height:12px; 
+  border-radius:50%; 
+  margin-right:8px; 
+  vertical-align:middle; 
+}
 
 /* form selects on borough page */
-.info-box label { display:block; margin-top: 8px; color:var(--muted); font-weight:600; }
+.info-box label { 
+  display:block; 
+  margin-top: 8px; 
+  color:var(--muted); 
+  font-weight:600; 
+}
+
 .info-box select, .info-box button {
   width:100%;
   margin-top:6px;
@@ -227,9 +324,220 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* responsive */
-@media (max-width: 900px) {
-  .container, .map-container { flex-direction: column; height: auto; padding: 16px; }
-  .right-panel { width: 100%; order: 3; margin-top: 12px; justify-content: center; }
-  .card { width: 92%; height: 260px; }
+/* ---------------- Mobile Navigation ---------------- */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 1rem;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .menu-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    flex-direction: column;
+    min-width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .menu-list:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .menu-list.hidden {
+    display: flex !important;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .menu-list a {
+    border-radius: 8px;
+    text-align: center;
+    border-left: none !important; /* Remove left border on mobile */
+  }
+  
+  .menu-list a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: var(--highlight);
+    border-radius: 1px;
+  }
+
+  /* Responsive layout adjustments */
+  .container, .map-container { 
+    flex-direction: column; 
+    height: auto; 
+    padding: 16px; 
+  }
+  
+  .right-panel { 
+    width: 100%; 
+    order: 3; 
+    margin-top: 12px; 
+    justify-content: center; 
+  }
+  
+  .card { 
+    width: 92%; 
+    height: 260px; 
+  }
+}
+
+/* ---------------- Desktop Layout ---------------- */
+@media (min-width: 769px) {
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .menu-list.hidden {
+    display: flex !important;
+  }
+}
+
+/* Ensure menu is always accessible */
+#menuList {
+  display: flex;
+}
+
+#menuList.hidden {
+  display: none;
+}
+
+/* Fix for mobile menu toggle */
+@media (max-width: 768px) {
+  #menuList:not(.hidden) {
+    display: flex;
+  }
+  
+  #menuList.hidden {
+    display: none;
+  }
+}
+
+/* ---------------- Animations & Utilities ---------------- */
+
+/* subtle fade animation */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* improved Try button */
+.try-btn {
+  background: linear-gradient(135deg, #0077b6, #3254b9);
+  color: #fff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.try-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 119, 182, 0.25);
+}
+
+/* Fix for navigation link positioning and clickability */
+.menu-list a {
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  display: block; /* Ensure proper block-level display */
+  z-index: 1; /* Ensure links are above other elements */
+}
+
+/* Ensure proper spacing and layout */
+.menu-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+  align-items: center; /* Vertically center items */
+}
+
+.menu-list li {
+  position: relative;
+  display: flex; /* Ensure li doesn't interfere with link sizing */
+}
+
+/* Fix for mobile menu positioning */
+@media (max-width: 768px) {
+  .menu-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    flex-direction: column;
+    min-width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1001; /* Ensure menu appears above content */
+  }
+
+  .menu-list:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .menu-list.hidden {
+    display: flex !important;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .menu-list a {
+    border-radius: 8px;
+    text-align: center;
+    border-left: none !important;
+    margin: 2px 0; /* Add some vertical spacing */
+  }
+}
+
+/* Ensure header has proper z-index */
+.site-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
