@@ -5,16 +5,46 @@
   <title>More - CrimeMap London</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/map.css">
 </head>
 <body>
   <div id="header"></div>
 
-  <main style="padding:28px; max-width:900px; margin:0 auto;">
-    <h2>More</h2>
-    <p>Additional resources and links.</p>
-    <p><a href="/index.html">← Back to Home</a></p>
+  <main class="stats-container">
+    <section class="stats-panel">
+      <header class="stats-header">
+        <h1>Crime Statistics Explorer</h1>
+        <p>Select a borough to visualise recent monthly crime trends based on UK Police street-level data.</p>
+      </header>
+
+      <form class="stats-controls" id="trendControls">
+        <label>
+          Borough
+          <select id="trendBorough" required aria-label="Select borough"></select>
+        </label>
+        <label>
+          Months
+          <select id="trendMonths" aria-label="Number of months">
+            <option value="6">6</option>
+            <option value="12" selected>12</option>
+            <option value="18">18</option>
+            <option value="24">24</option>
+          </select>
+        </label>
+      </form>
+
+      <div id="trendStatus" class="map-status" role="status" aria-live="polite">Loading borough list...</div>
+
+      <div class="chart-wrapper">
+        <canvas id="trendChart" aria-label="Monthly crime totals line chart"></canvas>
+      </div>
+
+      <p class="stats-note">Source: <a href="https://data.police.uk/" target="_blank" rel="noopener">data.police.uk</a>. Counts represent the number of reported crimes returned for each borough's geographic boundary.</p>
+    </section>
   </main>
 
   <script src="/js/nav.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+  <script src="/js/statistics.js" defer></script>
 </body>
 </html>

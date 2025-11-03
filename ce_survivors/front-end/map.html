@@ -5,33 +5,49 @@
   <title>Map Page - CrimeMap London</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/map.css">
 </head>
 <body>
   <div id="header"></div>
 
   <main class="map-container">
-    <div id="londonMap" class="map-box" aria-label="London boroughs map placeholder">
-      <!-- For now we use clickable borough chips that simulate map interaction -->
-      <div class="borough red" data-borough="Camden">Camden</div>
-      <div class="borough yellow" data-borough="Hackney">Hackney</div>
-      <div class="borough green" data-borough="Westminster">Westminster</div>
-      <div class="borough red" data-borough="Tower Hamlets">Tower Hamlets</div>
-      <div class="borough green" data-borough="Islington">Islington</div>
-      <div class="borough yellow" data-borough="Kensington & Chelsea">Kensington & Chelsea</div>
-    </div>
+    <section class="map-box">
+      <header class="map-header">
+        <h1>London Borough Crime Map</h1>
+        <p class="map-subtitle">Colour-coded view of the latest street-level crime totals aggregated per borough.</p>
+      </header>
+      <div id="mapStatus" class="map-status" role="status" aria-live="polite">Loading London borough map...</div>
+      <div id="londonMap" class="map-svg-wrapper" aria-label="London borough crime map"></div>
+      <div class="map-legend" aria-hidden="true">
+        <span class="legend-label">Legend</span>
+        <span class="legend-item"><span class="legend-swatch legend-low"></span>&lt; 3000</span>
+        <span class="legend-item"><span class="legend-swatch legend-medium"></span>3000-4999</span>
+        <span class="legend-item"><span class="legend-swatch legend-high"></span>&gt;= 5000</span>
+        <span class="legend-item"><span class="legend-swatch legend-unknown"></span>No data</span>
+      </div>
+      <p class="map-hint">Click or press Enter on a borough to open its detailed statistics page.</p>
+    </section>
 
     <aside class="info-box">
-      <h3>Borough Security Levels in Crime Counts</h3>
-      <ul>
-        <li><span class="dot red"></span> Higher than <strong>5000</strong></li>
-        <li><span class="dot yellow"></span> Between <strong>3000 and 5000</strong></li>
-        <li><span class="dot green"></span> Less than <strong>3000</strong></li>
+      <h3>Top 5 Boroughs (Latest Month)</h3>
+      <ol id="mapTopList" class="map-top-list">
+        <li>Loading...</li>
+      </ol>
+      <div class="info-divider"></div>
+      <h4>How colours are assigned</h4>
+      <ul class="legend-explainer">
+        <li><span class="legend-swatch legend-high"></span>Higher than <strong>5000</strong> reported crimes</li>
+        <li><span class="legend-swatch legend-medium"></span>Between <strong>3000 and 4999</strong></li>
+        <li><span class="legend-swatch legend-low"></span>Lower than <strong>3000</strong></li>
+        <li><span class="legend-swatch legend-unknown"></span>No recent data returned</li>
       </ul>
-      <p style="margin-top:12px;color:var(--muted)">Click a borough to view details.</p>
     </aside>
   </main>
 
   <script src="/js/nav.js" defer></script>
+  <script src="https://d3js.org/d3.v7.min.js" defer></script>
+  <script src="https://unpkg.com/topojson-client@3" defer></script>
   <script src="/js/map.js" defer></script>
+  <script src="/js/map-visualization.js" defer></script>
 </body>
 </html>

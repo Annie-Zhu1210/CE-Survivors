@@ -3,27 +3,34 @@
 // Save selected borough name to localStorage so borough.html can read it
 
 document.addEventListener('DOMContentLoaded', () => {
-
   const mapContainer = document.getElementById('londonMap');
   if (!mapContainer) return;
 
-  // Add click handler to borough elements
+  const handleSelection = (boroughName) => {
+    if (!boroughName) return;
+    try {
+      localStorage.setItem('selectedBorough', boroughName);
+    } catch (e) {
+      console.warn('localStorage not available', e);
+    }
+    window.location.href = '/borough.html';
+  };
+
   mapContainer.addEventListener('click', (ev) => {
     const node = ev.target;
-    if (node && node.classList && node.classList.contains('borough')) {
-      const boroughName = node.getAttribute('data-borough');
-      if (!boroughName) return;
-
-      // Save selection to localStorage
-      try {
-        localStorage.setItem('selectedBorough', boroughName);
-      } catch (e) {
-        console.warn('localStorage not available', e);
-      }
-
-      // Navigate to borough detail page
-      window.location.href = '/borough.html';
+    const boroughName = node?.dataset?.borough;
+    if (boroughName) {
+      handleSelection(boroughName);
     }
   });
 
+  mapContainer.addEventListener('keydown', (ev) => {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    const node = ev.target;
+    const boroughName = node?.dataset?.borough;
+    if (boroughName) {
+      ev.preventDefault();
+      handleSelection(boroughName);
+    }
+  });
 });

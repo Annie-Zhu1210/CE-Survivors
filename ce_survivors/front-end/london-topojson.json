@@ -1,0 +1,572 @@
+{
+  "type": "Topology",
+  "objects": {
+    "london_geo": {
+      "type": "GeometryCollection",
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "geometries": [{
+        "type": "MultiPolygon",
+        "id": "Barking",
+        "arcs": [
+          [
+            [0, 1, 2]
+          ],
+          [
+            [3, 4, 5]
+          ]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Battersea",
+        "arcs": [
+          [6, 7, 8, 9, 10]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Beckenham",
+        "arcs": [
+          [11, 12, 13, 14]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Bermondsey and Old Southwark",
+        "arcs": [
+          [15, 16, 17, 18]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Bethnal Green and Bow",
+        "arcs": [
+          [19, 20, 21, 22]
+        ]
+      }, {
+        "type": "MultiPolygon",
+        "id": "Bexleyheath and Crayford",
+        "arcs": [
+          [
+            [23]
+          ],
+          [
+            [24, 25, 26]
+          ]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Brent Central",
+        "arcs": [
+          [27, 28, 29, 30, 31, 32, 33]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Brent North",
+        "arcs": [
+          [34, 35, -31, 36, 37, 38]
+        ]
+      }, {
+        "type": "MultiPolygon",
+        "id": "Brentford and Isleworth",
+        "arcs": [
+          [
+            [39]
+          ],
+          [
+            [40]
+          ],
+          [
+            [41]
+          ],
+          [
+            [42]
+          ],
+          [
+            [43, 44, 45, 46, 47, 48]
+          ]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Bromley and Chislehurst",
+        "arcs": [
+          [-14, 49, 50, 51, 52]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Camberwell and Peckham",
+        "arcs": [
+          [53, -19, 54, 55, 56]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Carshalton and Wallington",
+        "arcs": [
+          [57, 58, 59, 60, 61]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Chelsea and Fulham",
+        "arcs": [
+          [62, 63, 64, 65]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Chingford and Woodford Green",
+        "arcs": [
+          [66, 67, 68, 69, 70]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Chipping Barnet",
+        "arcs": [
+          [71, 72, 73, 74, 75]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Cities of London and Westminster",
+        "arcs": [
+          [-65, 76, 77, 78, 79, 80, -20, 81, 82]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Croydon Central",
+        "arcs": [
+          [83, -12, 84, 85, 86, 87]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Croydon North",
+        "arcs": [
+          [88, 89, -88, 90, -60, 91, 92]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Croydon South",
+        "arcs": [
+          [-61, -91, -87, 93]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Dagenham and Rainham",
+        "arcs": [
+          [-4, 94, 95, 96, 97, 98]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Dulwich and West Norwood",
+        "arcs": [
+          [-57, 99, -89, 100, 101]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Ealing Central and Acton",
+        "arcs": [
+          [102, 103, -37, -30, 104, -45]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Ealing North",
+        "arcs": [
+          [105, 106, 107, -38, -104, 108]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Ealing, Southall",
+        "arcs": [
+          [109, -109, -103, -44, 110]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "East Ham",
+        "arcs": [
+          [111, -3, 112, 113, 114]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Edmonton",
+        "arcs": [
+          [115, 116, 117, 118, -67, 119]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Eltham",
+        "arcs": [
+          [120, 121, 122, 123, -51]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Enfield North",
+        "arcs": [
+          [124, 125, -118]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Enfield, Southgate",
+        "arcs": [
+          [126, -125, -117, 127, 128, -72]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Erith and Thamesmead",
+        "arcs": [
+          [129, -26, 130, -123, 131]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Feltham and Heston",
+        "arcs": [
+          [-49, 132, 133, 134, -111]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Finchley and Golders Green",
+        "arcs": [
+          [-33, 135, -74, 136, 137, 138]
+        ]
+      }, {
+        "type": "MultiPolygon",
+        "id": "Greenwich and Woolwich",
+        "arcs": [
+          [
+            [139, 140]
+          ],
+          [
+            [141, 142, -132, -122, 143]
+          ]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Hackney North and Stoke Newington",
+        "arcs": [
+          [144, 145, 146, 147]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Hackney South and Shoreditch",
+        "arcs": [
+          [148, -147, 149, 150, 151, -21, -81, 152]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Hammersmith",
+        "arcs": [
+          [-46, -105, -29, 153, -63, 154]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Hampstead and Kilburn",
+        "arcs": [
+          [-34, -139, 155, 156, 157]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Harrow East",
+        "arcs": [
+          [158, 159, -35, 160, 161]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Harrow West",
+        "arcs": [
+          [-161, -39, -108, 162, 163]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Hayes and Harlington",
+        "arcs": [
+          [164, 165, -106, -110, -135]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Hendon",
+        "arcs": [
+          [-75, -136, -32, -36, -160, 166]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Holborn and St Pancras",
+        "arcs": [
+          [167, 168, 169, -79, 170, -156, -138]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Hornchurch and Upminster",
+        "arcs": [
+          [171, -98, 172]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Hornsey and Wood Green",
+        "arcs": [
+          [-137, -73, -129, 173, 174, -168]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Ilford North",
+        "arcs": [
+          [175, -96, 176, 177, -69, 178]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Ilford South",
+        "arcs": [
+          [-95, -6, 179, -1, -112, 180, -177]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Islington North",
+        "arcs": [
+          [-148, -149, 181, -169, -175, 182]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Islington South and Finsbury",
+        "arcs": [
+          [-182, -153, -80, -170]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Kensington",
+        "arcs": [
+          [-158, 183, -77, -64, -154, -28]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Kingston and Surbiton",
+        "arcs": [
+          [184, 185, 186, 187, 188]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Lewisham East",
+        "arcs": [
+          [-144, -121, -50, 189, 190]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Lewisham West and Penge",
+        "arcs": [
+          [-100, -56, 191, -190, -13, -84, -90]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Lewisham, Deptford",
+        "arcs": [
+          [192, -142, -191, -192, -55, -18, 193, -141]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Leyton and Wanstead",
+        "arcs": [
+          [-181, -115, 194, -151, 195, -70, -178]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Mitcham and Morden",
+        "arcs": [
+          [196, 197, -92, -59, 198, 199]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Old Bexley and Sidcup",
+        "arcs": [
+          [-124, -131, -25, 200, 201, -52]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Orpington",
+        "arcs": [
+          [-85, -15, -53, -202, 202]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Poplar and Limehouse",
+        "arcs": [
+          [203, 204, -82, -23]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Putney",
+        "arcs": [
+          [205, 206, -10, 207, 208]
+        ]
+      }, {
+        "type": "MultiPolygon",
+        "id": "Richmond Park",
+        "arcs": [
+          [
+            [209]
+          ],
+          [
+            [210]
+          ],
+          [
+            [211, -185, 212, 213, -206]
+          ]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Romford",
+        "arcs": [
+          [-176, 214, -173, -97]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Ruislip, Northwood and Pinner",
+        "arcs": [
+          [215, -162, -164, 216]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Streatham",
+        "arcs": [
+          [217, -101, -93, -198, 218, -8]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Sutton and Cheam",
+        "arcs": [
+          [219, -199, -58, 220, -187]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Tooting",
+        "arcs": [
+          [221, -208, -9, -219, -197]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Tottenham",
+        "arcs": [
+          [-145, -183, -174, -128, -116, 222]
+        ]
+      }, {
+        "type": "MultiPolygon",
+        "id": "Twickenham",
+        "arcs": [
+          [
+            [223]
+          ],
+          [
+            [-133, -48, 224, -213, -189, 225]
+          ]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Uxbridge and South Ruislip",
+        "arcs": [
+          [226, -217, -163, -107, -166]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Vauxhall",
+        "arcs": [
+          [-7, 227, -16, -54, -102, -218]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Walthamstow",
+        "arcs": [
+          [-223, -120, -71, -196, -150, -146]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "West Ham",
+        "arcs": [
+          [-22, -152, -195, -114, 228, -204]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Westminster North",
+        "arcs": [
+          [-157, -171, -78, -184]
+        ]
+      }, {
+        "type": "Polygon",
+        "id": "Wimbledon",
+        "arcs": [
+          [-212, -209, -222, -200, -220, -186]
+        ]
+      }]
+    }
+  },
+  "arcs": [
+    [
+      [6853, 6360],
+      [12, -7]
+    ],
+    [
+      [6865, 6353],
+      [-9, -50],
+      [6, -18],
+      [-7, -11],
+      [11, -16],
+      [-4, -34],
+      [16, -11],
+      [29, -97],
+      [0, -25],
+      [27, -48],
+      [3, -43],
+      [0, 1],
+      [-27, -13]
+    ],
+    [
+      [6910, 5988],
+      [-5, -2],
+      [-10, 91],
+      [-29, 82],
+      [-18, -2],
+      [4, 20],
+      [7, 4],
+      [-22, 60],
+      [-4, 31],
+      [20, 88]
+    ],
+    [
+      [7575, 6906],
+      [74, 3],
+      [16, 10],
+      [8, -95],
+      [-15, -2],
+      [-2, -45],
+      [138, -6],
+      [0, -39],
+      [-10, -57],
+      [-15, 12],
+      [-5, 21],
+      [-36, -2],
+      [2, -66],
+      [34, 2],
+      [-5, -8],
+      [-17, -25],
+      [-55, -26],
+      [-23, -16],
+      [1, -8],
+      [56, -38],
+      [136, 11],
+      [38, -9],
+      [1, -66],
+      [10, -1],
+      [0, -15],
+      [15, 1],
+      [4, -36],
+      [12, -34],
+      [20, -28],
+      [-1, -11],
+      [-90, -31],
+      [-162, -24],
+      [39, -83],
+      [-14, -43],
+      [37, -11],
+      [2, -10],
+      [30, 4],
+      [1, -72],
+      [-7, -27],
+      [1, -57],
+      [-35, -299],
+      [-19, -38]
+    ],
+    [
+... (full content) ...
