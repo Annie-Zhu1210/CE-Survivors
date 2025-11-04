@@ -2,17 +2,21 @@
 // Node.js HTTP server that serves the static front-end and proxies Police API data
 // Provides borough-level aggregations using a supplied London TopoJSON file.
 
+require('dotenv').config();
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const db = require('./db');
 
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = path.join(__dirname, '..', 'front-end');
 const BOROUGH_TOPO_PATH = path.join(PUBLIC_DIR, 'london-topojson.json');
 const POLICE_BASE = 'https://data.police.uk/api';
 const DEFAULT_CATEGORY = 'all-crime';
-const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
+const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes (in-memory cache)
+const DB_CACHE_TTL_MS = Number(process.env.DB_CACHE_TTL_MS) || 6 * 60 * 60 * 1000; // 6 hours
 const MAX_POLY_POINTS = 35; // limit to keep poly query comfortably < 4KB
 
 // Legacy fallback values used by older front-end screens until they are fully migrated.
@@ -56,6 +60,7 @@ const boroughIndex = new Map(boroughs.map(b => [b.id, b]));
 const crimeCache = new Map();
 const trendCache = new Map();
 let crimeMonthsCache = { data: null, fetchedAt: 0 };
+const databaseConfigured = db.isConfigured();
 
 const server = http.createServer((req, res) => {
   handleRequest(req, res).catch(err => {
@@ -73,6 +78,11 @@ server.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
   if (!boroughs.length) {
     console.warn('Warning: london-topojson.json not found or empty. Borough endpoints will be unavailable.');
+  }
+  if (databaseConfigured) {
+    console.log('MySQL integration enabled. Results will be cached to the configured database.');
+  } else {
+    console.warn('MySQL integration disabled or misconfigured. API results will not be persisted.');
   }
 });
 
@@ -378,45 +388,59 @@ async function getBoroughSummary(boroughId, { date = null, category = DEFAULT_CA
     throw createHttpError(404, `Unknown borough: ${boroughId}`);
   }
 
-  const cacheKey = `${boroughId}|${category}|${date || 'latest'}`;
+  const requestedCategory = (category || DEFAULT_CATEGORY).trim() || DEFAULT_CATEGORY;
+  const requestedDate = date ? String(date).trim() : null;
+  const cacheKey = `${boroughId}|${requestedCategory}|${requestedDate || 'latest'}`;
   const cached = crimeCache.get(cacheKey);
   if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
     return cached.payload;
   }
 
-  let totalCrimes = 0;
-  let resolvedDate = date || null;
+  try {
+    const dbRow = await db.getBoroughAggregate({
+      borough: boroughId,
+      category: requestedCategory,
+      date: requestedDate
+    });
 
-  for (const poly of borough.polyStrings) {
-    const params = new URLSearchParams();
-    params.set('poly', poly);
-    if (date) params.set('date', date);
-    const apiUrl = `${POLICE_BASE}/crimes-street/${category}?${params.toString()}`;
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      const body = await response.text().catch(() => '');
-      throw createHttpError(response.status, `Police API error (${response.status}): ${body || 'request failed'}`);
+    const isHistorical = Boolean(requestedDate);
+    if (dbRow && isDbResultFresh(dbRow?.fetched_at, isHistorical)) {
+      const payload = {
+        borough: boroughId,
+        totalCrimes: Number(dbRow.total_crimes) || 0,
+        date: dbRow.crime_month,
+        category: requestedCategory
+      };
+      crimeCache.set(cacheKey, { fetchedAt: Date.now(), payload });
+      return payload;
     }
-    const crimes = await response.json();
-    if (!resolvedDate && crimes.length) {
-      resolvedDate = crimes[0].month;
-    }
-    totalCrimes += crimes.length;
+  } catch (error) {
+    console.error(`Database lookup failed for ${boroughId}:`, error.message || error);
   }
 
-  const payload = {
-    borough: boroughId,
-    totalCrimes,
-    date: resolvedDate || date || null,
-    category
-  };
+  const fetched = await fetchBoroughSummaryFromPolice(borough, {
+    date: requestedDate,
+    category: requestedCategory
+  });
 
-  crimeCache.set(cacheKey, { fetchedAt: Date.now(), payload });
-  return payload;
+  if (fetched.date) {
+    db.saveBoroughAggregate({
+      borough: boroughId,
+      category: requestedCategory,
+      date: fetched.date,
+      totalCrimes: fetched.totalCrimes
+    }).catch(error => {
+      console.error(`Failed to persist borough summary for ${boroughId}:`, error.message || error);
+    });
+  }
+
+  crimeCache.set(cacheKey, { fetchedAt: Date.now(), payload: fetched });
+  return fetched;
 }
 
 async function getBoroughTrend(boroughId, { months = 12, category = DEFAULT_CATEGORY } = {}) {
-  const key = `${boroughId}|trend|${category}|${months}`;
+  const requestedCategory = (category || DEFAULT_CATEGORY).trim() || DEFAULT_CATEGORY;
+  const key = `${boroughId}|trend|${requestedCategory}|${months}`;
   const cached = trendCache.get(key);
   if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
     return cached.payload;
@@ -428,7 +452,7 @@ async function getBoroughTrend(boroughId, { months = 12, category = DEFAULT_CATE
 
   for (const month of selectedMonths) {
     try {
-      const summary = await getBoroughSummary(boroughId, { date: month, category });
+      const summary = await getBoroughSummary(boroughId, { date: month, category: requestedCategory });
       timeline.push({ date: month, totalCrimes: summary.totalCrimes });
     } catch (err) {
       timeline.push({ date: month, error: err.message, status: err.statusCode || 500 });
@@ -437,7 +461,7 @@ async function getBoroughTrend(boroughId, { months = 12, category = DEFAULT_CATE
 
   const payload = {
     borough: boroughId,
-    category,
+    category: requestedCategory,
     months: timeline
   };
 
@@ -445,16 +469,102 @@ async function getBoroughTrend(boroughId, { months = 12, category = DEFAULT_CATE
   return payload;
 }
 
+async function fetchBoroughSummaryFromPolice(borough, { date, category }) {
+  if (!borough || !Array.isArray(borough.polyStrings) || !borough.polyStrings.length) {
+    const id = borough?.id || 'unknown';
+    throw createHttpError(500, `Borough ${id} is missing polygon data and cannot be queried.`);
+  }
+
+  let totalCrimes = 0;
+  let resolvedDate = date || null;
+
+  for (const poly of borough.polyStrings) {
+    const params = new URLSearchParams();
+    params.set('poly', poly);
+    if (date) params.set('date', date);
+
+    const apiUrl = `${POLICE_BASE}/crimes-street/${category}?${params.toString()}`;
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      const body = await response.text().catch(() => '');
+      throw createHttpError(response.status, `Police API error (${response.status}): ${body || 'request failed'}`);
+    }
+
+    const crimes = await response.json();
+    if (!resolvedDate && Array.isArray(crimes) && crimes.length) {
+      resolvedDate = crimes[0]?.month || resolvedDate;
+    }
+    totalCrimes += Array.isArray(crimes) ? crimes.length : 0;
+  }
+
+  return {
+    borough: borough.id,
+    totalCrimes,
+    date: resolvedDate || date || null,
+    category
+  };
+}
+
+function isDbResultFresh(fetchedAt, isHistorical = false) {
+  if (isHistorical) {
+    return true;
+  }
+  if (!fetchedAt) {
+    return false;
+  }
+  const timestamp = fetchedAt instanceof Date ? fetchedAt.getTime() : new Date(fetchedAt).getTime();
+  if (!Number.isFinite(timestamp)) {
+    return false;
+  }
+  return Date.now() - timestamp < DB_CACHE_TTL_MS;
+}
+
+function toTimestamp(value) {
+  if (!value) {
+    return null;
+  }
+  if (value instanceof Date) {
+    const ms = value.getTime();
+    return Number.isFinite(ms) ? ms : null;
+  }
+  const ms = new Date(value).getTime();
+  return Number.isFinite(ms) ? ms : null;
+}
+
 async function getCrimeMonths() {
-  if (crimeMonthsCache.data && Date.now() - crimeMonthsCache.fetchedAt < CACHE_TTL_MS) {
+  const now = Date.now();
+  if (crimeMonthsCache.data && now - crimeMonthsCache.fetchedAt < CACHE_TTL_MS) {
     return crimeMonthsCache.data;
   }
+
+  try {
+    const dbResult = await db.getCrimeMonthsFromDb();
+    if (dbResult && Array.isArray(dbResult.months) && dbResult.months.length) {
+      const fetchedAtMs = toTimestamp(dbResult.fetchedAt);
+      if (!fetchedAtMs || now - fetchedAtMs < DB_CACHE_TTL_MS) {
+        crimeMonthsCache = { data: dbResult.months, fetchedAt: now };
+        return dbResult.months;
+      }
+    }
+  } catch (error) {
+    console.error('Failed to read cached crime months from database:', error.message || error);
+  }
+
   const response = await fetch(`${POLICE_BASE}/crimes-street-dates`);
   if (!response.ok) {
     throw createHttpError(response.status, `Failed to load crime months (${response.status})`);
   }
   const months = await response.json();
-  crimeMonthsCache = { data: months, fetchedAt: Date.now() };
+  if (!Array.isArray(months)) {
+    throw createHttpError(500, 'Unexpected response when loading crime months');
+  }
+
+  crimeMonthsCache = { data: months, fetchedAt: now };
+
+  db.replaceCrimeMonths(months).catch(error => {
+    console.error('Failed to persist crime months to database:', error.message || error);
+  });
+
   return months;
 }
 
