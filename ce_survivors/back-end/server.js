@@ -38,6 +38,13 @@ const fallbackTimes = ['2025-10', '2025-09', '2025-08', '2025-07', '2025-06'];
 
 const fallbackCrimeTypes = ['All', 'Violence and Sexual Offences', 'Burglary', 'Vehicle Crime', 'Theft', 'Drugs'];
 
+const fallbackBoroughNames = Array.from(new Set([
+  ...fallbackBoroughCounts.map(entry => entry.borough),
+  ...Object.keys(fallbackLocations)
+])).sort((a, b) => a.localeCompare(b));
+
+const DEFAULT_CORS_ORIGIN = process.env.CORS_ALLOW_ORIGIN || '*';
+
 const contentTypes = {
   '.html': 'text/html',
   '.css': 'text/css',
@@ -83,6 +90,15 @@ async function handleRequest(req, res) {
   const pathname = parsed.pathname;
 
   if (pathname.startsWith('/api/')) {
+    if (req.method === 'OPTIONS') {
+      applyCorsHeaders(res);
+      if (!res.headersSent) {
+        res.writeHead(204, { 'Content-Length': '0' });
+      }
+      res.end();
+      return;
+    }
+
     await handleApiRequest(req, res, pathname, parsed.query);
     return;
   }
@@ -128,14 +144,22 @@ async function handleApiRequest(req, res, pathname, query) {
   }
 
   if (pathname === '/api/boroughs' && req.method === 'GET') {
-    ensureBoroughData();
-    sendJson(res, {
-      boroughs: boroughs.map(b => ({
-        id: b.id,
-        centroid: b.centroid,
-        polygons: b.polygons.length
-      }))
-    });
+    try {
+      ensureBoroughData();
+      sendJson(res, {
+        boroughs: boroughs.map(b => ({
+          id: b.id,
+          centroid: b.centroid,
+          polygons: b.polygons.length
+        }))
+      });
+    } catch (err) {
+      console.warn('Falling back to static borough list:', err.message);
+      sendJson(res, {
+        boroughs: buildFallbackBoroughs(),
+        fallback: true
+      });
+    }
     return;
   }
 
@@ -174,7 +198,6 @@ async function handleApiRequest(req, res, pathname, query) {
   }
 
   if (pathname.startsWith('/api/boroughs/') && pathname.endsWith('/trend') && req.method === 'GET') {
-    ensureBoroughData();
     const parts = pathname.split('/'); // ['', 'api', 'boroughs', '<id>', 'trend']
     const boroughId = decodeURIComponent(parts[3] || '').trim();
     if (!boroughId) {
@@ -183,8 +206,15 @@ async function handleApiRequest(req, res, pathname, query) {
 
     const months = parsePositiveInt(query.months, 12);
     const category = (query.category || DEFAULT_CATEGORY).trim() || DEFAULT_CATEGORY;
-    const trend = await getBoroughTrend(boroughId, { months, category });
-    sendJson(res, trend);
+    try {
+      ensureBoroughData();
+      const trend = await getBoroughTrend(boroughId, { months, category });
+      sendJson(res, trend);
+    } catch (err) {
+      console.warn(`Falling back to mock trend data for ${boroughId}:`, err.message);
+      const fallbackTrend = buildFallbackTrend(boroughId, { months, category });
+      sendJson(res, fallbackTrend);
+    }
     return;
   }
 
@@ -201,8 +231,7 @@ async function handleApiRequest(req, res, pathname, query) {
     return;
   }
 
-  res.writeHead(404, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({ error: 'API route not found' }));
+  sendJson(res, { error: 'API route not found' }, 404);
 }
 
 async function serveStatic(pathname, res) {
@@ -225,11 +254,27 @@ async function serveStatic(pathname, res) {
   }
 }
 
+function applyCorsHeaders(res) {
+  if (res.headersSent) {
+    return;
+  }
+  if (!res.getHeader('Access-Control-Allow-Origin')) {
+    res.setHeader('Access-Control-Allow-Origin', DEFAULT_CORS_ORIGIN);
+  }
+  if (!res.getHeader('Access-Control-Allow-Methods')) {
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  }
+  if (!res.getHeader('Access-Control-Allow-Headers')) {
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+}
+
 function getContentType(ext) {
   return contentTypes[ext] || 'text/plain';
 }
 
 function sendJson(res, payload, statusCode = 200) {
+  applyCorsHeaders(res);
   if (!res.headersSent) {
     res.writeHead(statusCode, { 'Content-Type': 'application/json' });
   }
@@ -240,6 +285,48 @@ function ensureBoroughData() {
   if (!boroughs.length) {
     throw createHttpError(503, 'Borough topology unavailable. Please ensure london-topojson.json is present.');
   }
+}
+
+function buildFallbackBoroughs() {
+  return fallbackBoroughNames.map(name => ({
+    id: name,
+    centroid: [0, 0],
+    polygons: 0,
+    fallback: true
+  }));
+}
+
+function buildFallbackTrend(boroughId, { months = 12, category = DEFAULT_CATEGORY } = {}) {
+  const safeMonths = clamp(months, 1, 24);
+  const seed = createSeedFromString(boroughId);
+  const baseCount = fallbackBoroughCounts.find(entry => entry.borough === boroughId)?.count ?? (3600 + (seed % 900));
+  const amplitude = Math.max(180, Math.round(baseCount * 0.18));
+  const driftPerMonth = ((seed % 9) - 4) * 18;
+  const timeline = [];
+  const now = new Date();
+
+  for (let i = 0; i < safeMonths; i += 1) {
+    const monthDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - i, 1));
+    const label = formatMonthLabel(monthDate);
+    const seasonal = Math.sin((i + (seed % 11)) / 1.8);
+    const noise = Math.cos((i + (seed % 7)) / 2.2) * 0.35;
+    const trendValue = baseCount + (seasonal * amplitude) + (noise * amplitude * 0.5) + (driftPerMonth * (safeMonths - i) * 0.05);
+    const totalCrimes = Math.max(0, Math.round(trendValue));
+
+    timeline.push({
+      date: label,
+      totalCrimes,
+      fallback: true
+    });
+  }
+
+  return {
+    borough: boroughId,
+    category,
+    months: timeline,
+    fallback: true,
+    note: 'Mock trend data generated because live Police API data was unavailable.'
+  };
 }
 
 // Borough data preparation helpers
@@ -459,6 +546,25 @@ async function getCrimeMonths() {
 }
 
 // Utilities
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function formatMonthLabel(date) {
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  return `${year}-${month}`;
+}
+
+function createSeedFromString(input = '') {
+  if (!input) return 0;
+  let hash = 0;
+  for (let i = 0; i < input.length; i += 1) {
+    hash = (hash * 31 + input.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
 
 function parsePositiveInt(value, fallback) {
   const parsed = Number.parseInt(value, 10);
