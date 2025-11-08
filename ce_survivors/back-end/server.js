@@ -43,6 +43,8 @@ const fallbackBoroughNames = Array.from(new Set([
   ...Object.keys(fallbackLocations)
 ])).sort((a, b) => a.localeCompare(b));
 
+const DEFAULT_CORS_ORIGIN = process.env.CORS_ALLOW_ORIGIN || '*';
+
 const contentTypes = {
   '.html': 'text/html',
   '.css': 'text/css',
@@ -88,6 +90,15 @@ async function handleRequest(req, res) {
   const pathname = parsed.pathname;
 
   if (pathname.startsWith('/api/')) {
+    if (req.method === 'OPTIONS') {
+      applyCorsHeaders(res);
+      if (!res.headersSent) {
+        res.writeHead(204, { 'Content-Length': '0' });
+      }
+      res.end();
+      return;
+    }
+
     await handleApiRequest(req, res, pathname, parsed.query);
     return;
   }
@@ -220,8 +231,7 @@ async function handleApiRequest(req, res, pathname, query) {
     return;
   }
 
-  res.writeHead(404, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({ error: 'API route not found' }));
+  sendJson(res, { error: 'API route not found' }, 404);
 }
 
 async function serveStatic(pathname, res) {
@@ -244,11 +254,27 @@ async function serveStatic(pathname, res) {
   }
 }
 
+function applyCorsHeaders(res) {
+  if (res.headersSent) {
+    return;
+  }
+  if (!res.getHeader('Access-Control-Allow-Origin')) {
+    res.setHeader('Access-Control-Allow-Origin', DEFAULT_CORS_ORIGIN);
+  }
+  if (!res.getHeader('Access-Control-Allow-Methods')) {
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  }
+  if (!res.getHeader('Access-Control-Allow-Headers')) {
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+}
+
 function getContentType(ext) {
   return contentTypes[ext] || 'text/plain';
 }
 
 function sendJson(res, payload, statusCode = 200) {
+  applyCorsHeaders(res);
   if (!res.headersSent) {
     res.writeHead(statusCode, { 'Content-Type': 'application/json' });
   }
