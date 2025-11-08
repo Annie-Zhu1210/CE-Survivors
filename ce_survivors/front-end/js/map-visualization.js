@@ -22,21 +22,22 @@
 
     const statusEl = document.getElementById('mapStatus');
     const listEl = document.getElementById('mapTopList');
+    const dataClient = window.Query;
+
+    if (!dataClient) {
+      console.error('Query.js has not loaded.');
+      if (statusEl) {
+        statusEl.textContent = 'Unable to initialise data client.';
+        statusEl.classList.add('error');
+      }
+      return;
+    }
 
     const setStatus = (message, isError = false) => {
       if (statusEl) {
         statusEl.textContent = message;
         statusEl.classList.toggle('error', isError);
       }
-    };
-
-    const fetchJson = async (url) => {
-      const response = await fetch(url);
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        throw new Error(text || `Request failed with status ${response.status}`);
-      }
-      return response.json();
     };
 
     const classifyValue = (value) => {
@@ -142,8 +143,8 @@
       try {
         setStatus('Loading London borough map and crime totals...');
         const [topology, totals] = await Promise.all([
-          fetchJson('/london-topojson.json'),
-          fetchJson('/api/boroughs/crime-totals')
+          dataClient.getLondonTopology(),
+          dataClient.getBoroughCrimeTotals()
         ]);
         renderMap(topology, totals);
       } catch (err) {

@@ -23,17 +23,15 @@
       }
     };
 
-    const fetchJson = async (url) => {
-      const response = await fetch(url);
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        throw new Error(text || `Request failed with status ${response.status}`);
-      }
-      return response.json();
-    };
+    const dataClient = window.Query;
+    if (!dataClient) {
+      console.error('Query.js has not loaded.');
+      setStatus('Unable to initialise trend data client.', true);
+      return;
+    }
 
     const populateBoroughs = async () => {
-      const data = await fetchJson('/api/boroughs');
+      const data = await dataClient.getBoroughList();
       const boroughs = Array.isArray(data?.boroughs) ? data.boroughs : [];
       boroughs.sort((a, b) => a.id.localeCompare(b.id));
 
@@ -123,8 +121,7 @@
       setStatus(`Loading ${borough} trend...`);
 
       try {
-        const url = `/api/boroughs/${encodeURIComponent(borough)}/trend?months=${months}&category=${DEFAULT_CATEGORY}`;
-        const trend = await fetchJson(url);
+        const trend = await dataClient.getBoroughTrend(borough, { months, category: DEFAULT_CATEGORY });
         const timeline = Array.isArray(trend?.months) ? trend.months : [];
 
         if (!timeline.length) {
