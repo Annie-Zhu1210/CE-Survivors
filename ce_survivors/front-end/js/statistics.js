@@ -5,6 +5,7 @@
 (function () {
   const DEFAULT_CATEGORY = 'all-crime';
   let chartInstance = null;
+  let boroughListFallback = false;
 
   document.addEventListener('DOMContentLoaded', () => {
     const boroughSelect = document.getElementById('trendBorough');
@@ -34,6 +35,7 @@
 
     const populateBoroughs = async () => {
       const data = await fetchJson('/api/boroughs');
+      boroughListFallback = Boolean(data?.fallback);
       const boroughs = Array.isArray(data?.boroughs) ? data.boroughs : [];
       boroughs.sort((a, b) => a.id.localeCompare(b.id));
 
@@ -48,6 +50,10 @@
       const saved = localStorage.getItem('selectedBorough');
       if (saved && boroughs.some(item => item.id === saved)) {
         boroughSelect.value = saved;
+      }
+
+      if (boroughListFallback) {
+        setStatus('Using placeholder borough list while live data is unavailable.');
       }
 
       return boroughSelect.value || (boroughs[0] ? boroughs[0].id : '');
@@ -147,8 +153,15 @@
 
         updateChart(labelsAscending, `${borough} crimes`, dataAscending);
 
-        const message = `Showing ${borough} - ${months} months - Category: ${DEFAULT_CATEGORY}` +
+        let message = `Showing ${borough} - ${months} months - Category: ${DEFAULT_CATEGORY}` +
           (missingCount ? ` - ${missingCount} month(s) missing` : '');
+
+        if (trend?.fallback) {
+          message += ' - displaying placeholder trend data';
+        } else if (boroughListFallback) {
+          message += ' - borough list sourced from placeholder data';
+        }
+
         setStatus(message, false);
 
         try {
