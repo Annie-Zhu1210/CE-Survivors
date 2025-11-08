@@ -1,7 +1,6 @@
 // map.js
-// Handle clicks on borough chips and navigate to borough detail page
-// Save selected borough name to localStorage so borough.html can read it
-
+// Handle clicks on borough paths and navigate to statistics page
+// Save selected borough name to localStorage so statistics.html can read it
 
 document.addEventListener('DOMContentLoaded', () => {
   const mapContainer = document.getElementById('londonMap');
@@ -11,12 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!boroughName) return;
     try {
       localStorage.setItem('selectedBorough', boroughName);
+      console.log('Selected borough:', boroughName);
     } catch (e) {
       console.warn('localStorage not available', e);
     }
-    window.location.href = '/more.html';
+    // Redirect to statistics page
+    window.location.href = '/statistics.html';
   };
 
+  // Handle mouse clicks
   mapContainer.addEventListener('click', (ev) => {
     const node = ev.target;
     const boroughName = node?.dataset?.borough;
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Handle keyboard navigation (Enter/Space)
   mapContainer.addEventListener('keydown', (ev) => {
     if (ev.key !== 'Enter' && ev.key !== ' ') return;
     const node = ev.target;

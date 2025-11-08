@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Borough Statistics - SafeCity London</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/map.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+  <!-- Header will be injected by nav.js -->
+  <div id="header"></div>
+
+  <main class="stats-container">
+    <section class="stats-panel">
+      <header class="stats-header">
+        <h1 id="boroughTitle">Borough Statistics</h1>
+        <p>Crime trend analysis for the selected borough based on UK Police street-level data.</p>
+      </header>
+
+      <form class="stats-controls" id="trendControls">
+        <label>
+          Time Period
+          <select id="trendMonths" aria-label="Number of months">
+            <option value="6">Last 6 Months</option>
+            <option value="12" selected>Last 12 Months</option>
+            <option value="18">Last 18 Months</option>
+            <option value="24">Last 24 Months</option>
+          </select>
+        </label>
+      </form>
+
+      <div id="trendStatus" class="map-status" role="status" aria-live="polite">Loading crime statistics...</div>
+
+      <div class="chart-wrapper">
+        <canvas id="trendChart" aria-label="Monthly crime totals line chart"></canvas>
+      </div>
+
+      <p class="stats-note">
+        Source: <a href="https://data.police.uk/" target="_blank" rel="noopener">data.police.uk</a>. 
+        Counts represent the number of reported crimes for this borough's geographic boundary.
+      </p>
+
+      <div style="margin-top: 2rem; text-align: center;">
+        <a href="/map.html" class="btn" style="display: inline-block; padding: 12px 24px; background: #014f86; color: white; text-decoration: none; border-radius: 8px;">
+          ← Back to Map
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/nav.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="/js/statistics.js" defer></script>
+</body>
+</html>

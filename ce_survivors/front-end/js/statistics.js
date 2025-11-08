@@ -1,19 +1,37 @@
 /* statistics.js
- * Power the statistics page with a Chart.js line chart showing borough crime trends.
+ * Display crime trend line chart for the borough selected from the map
  */
 
 (function () {
   const DEFAULT_CATEGORY = 'all-crime';
   let chartInstance = null;
+  let currentBorough = null;
 
   document.addEventListener('DOMContentLoaded', () => {
-    const boroughSelect = document.getElementById('trendBorough');
     const monthsSelect = document.getElementById('trendMonths');
     const statusEl = document.getElementById('trendStatus');
     const canvas = document.getElementById('trendChart');
+    const titleEl = document.getElementById('boroughTitle');
 
-    if (!boroughSelect || !monthsSelect || !canvas) {
+    if (!monthsSelect || !canvas) {
+      console.error('Required elements not found!');
       return;
+    }
+
+    // Get selected borough from localStorage
+    currentBorough = localStorage.getItem('selectedBorough');
+    
+    if (!currentBorough) {
+      setStatus('No borough selected. Please select a borough from the map.', true);
+      if (titleEl) {
+        titleEl.textContent = 'No Borough Selected';
+      }
+      return;
+    }
+
+    // Update page title
+    if (titleEl) {
+      titleEl.textContent = `${currentBorough} - Crime Statistics`;
     }
 
     const setStatus = (message, isError = false) => {
@@ -24,37 +42,27 @@
     };
 
     const fetchJson = async (url) => {
-      const response = await fetch(url);
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        throw new Error(text || `Request failed with status ${response.status}`);
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          const text = await response.text().catch(() => '');
+          throw new Error(text || `Request failed with status ${response.status}`);
+        }
+        return response.json();
+      } catch (error) {
+        console.error('Fetch error:', error);
+        throw error;
       }
-      return response.json();
-    };
-
-    const populateBoroughs = async () => {
-      const data = await fetchJson('/api/boroughs');
-      const boroughs = Array.isArray(data?.boroughs) ? data.boroughs : [];
-      boroughs.sort((a, b) => a.id.localeCompare(b.id));
-
-      boroughSelect.innerHTML = '';
-      boroughs.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.id;
-        option.textContent = item.id;
-        boroughSelect.appendChild(option);
-      });
-
-      const saved = localStorage.getItem('selectedBorough');
-      if (saved && boroughs.some(item => item.id === saved)) {
-        boroughSelect.value = saved;
-      }
-
-      return boroughSelect.value || (boroughs[0] ? boroughs[0].id : '');
     };
 
     const updateChart = (labels, datasetLabel, dataPoints) => {
       const context = canvas.getContext('2d');
+      
+      if (!context) {
+        console.error('Could not get canvas context');
+        return;
+      }
+
       const chartData = {
         labels,
         datasets: [
@@ -66,8 +74,9 @@
             backgroundColor: '#014f86',
             tension: 0.25,
             spanGaps: true,
-            pointRadius: 4,
-            pointHoverRadius: 6
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            borderWidth: 2
           }
         ]
       };
@@ -78,14 +87,30 @@
         scales: {
           y: {
             beginAtZero: true,
-            title: { display: true, text: 'Number of crimes' }
+            title: { 
+              display: true, 
+              text: 'Number of Crimes',
+              font: { size: 14, weight: 'bold' }
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toLocaleString();
+              }
+            }
           },
           x: {
-            title: { display: true, text: 'Month' }
+            title: { 
+              display: true, 
+              text: 'Month',
+              font: { size: 14, weight: 'bold' }
+            }
           }
         },
         plugins: {
-          legend: { display: false },
+          legend: { 
+            display: true,
+            position: 'top'
+          },
           tooltip: {
             callbacks: {
               label: (ctx) => {
@@ -104,7 +129,12 @@
         chartInstance.options = options;
         chartInstance.update();
       } else {
-        chartInstance = new window.Chart(context, {
+        if (typeof Chart === 'undefined') {
+          console.error('Chart.js not loaded!');
+          setStatus('Chart.js library not loaded', true);
+          return;
+        }
+        chartInstance = new Chart(context, {
           type: 'line',
           data: chartData,
           options
@@ -113,22 +143,22 @@
     };
 
     const loadTrend = async () => {
-      const borough = boroughSelect.value;
       const months = Number.parseInt(monthsSelect.value, 10) || 12;
-      if (!borough) {
-        setStatus('No borough selected.', true);
-        return;
-      }
 
-      setStatus(`Loading ${borough} trend...`);
+      setStatus(`Loading ${currentBorough} crime trend...`);
+      console.log(`Loading trend for ${currentBorough}, ${months} months`);
 
       try {
-        const url = `/api/boroughs/${encodeURIComponent(borough)}/trend?months=${months}&category=${DEFAULT_CATEGORY}`;
+        const url = `/api/boroughs/${encodeURIComponent(currentBorough)}/trend?months=${months}&category=${DEFAULT_CATEGORY}`;
+        console.log('Fetching from:', url);
+        
         const trend = await fetchJson(url);
+        console.log('Trend data received:', trend);
+        
         const timeline = Array.isArray(trend?.months) ? trend.months : [];
 
         if (!timeline.length) {
-          updateChart([], `${borough} crimes`, []);
+          updateChart([], `${currentBorough} crimes`, []);
           setStatus('No trend data available for this borough.', true);
           return;
         }
@@ -140,22 +170,19 @@
           }
           return null;
         });
+        
         const missingCount = dataPoints.filter(value => value === null).length;
 
+        // Reverse to show oldest to newest (left to right)
         const labelsAscending = [...labels].reverse();
         const dataAscending = [...dataPoints].reverse();
 
-        updateChart(labelsAscending, `${borough} crimes`, dataAscending);
+        updateChart(labelsAscending, `${currentBorough} - Crime Trends`, dataAscending);
 
-        const message = `Showing ${borough} - ${months} months - Category: ${DEFAULT_CATEGORY}` +
-          (missingCount ? ` - ${missingCount} month(s) missing` : '');
+        const message = `Showing ${currentBorough} crime trends for the last ${months} months` +
+          (missingCount ? ` (${missingCount} month(s) have no data)` : '');
         setStatus(message, false);
 
-        try {
-          localStorage.setItem('selectedBorough', borough);
-        } catch (error) {
-          console.warn('Failed to persist selected borough', error);
-        }
       } catch (error) {
         console.error('Trend request failed:', error);
         setStatus(`Unable to load trend: ${error.message}`, true);
@@ -164,22 +191,41 @@
 
     const init = async () => {
       try {
-        const initialBorough = await populateBoroughs();
-        if (!initialBorough) {
-          setStatus('No boroughs available.', true);
-          return;
+        // Wait for Chart.js to load if it hasn't yet
+        if (typeof Chart === 'undefined') {
+          console.log('Waiting for Chart.js to load...');
+          await new Promise(resolve => {
+            const checkChart = setInterval(() => {
+              if (typeof Chart !== 'undefined') {
+                clearInterval(checkChart);
+                resolve();
+              }
+            }, 100);
+            
+            // Timeout after 5 seconds
+            setTimeout(() => {
+              clearInterval(checkChart);
+              resolve();
+            }, 5000);
+          });
         }
 
-        boroughSelect.addEventListener('change', loadTrend);
+        if (typeof Chart === 'undefined') {
+          throw new Error('Chart.js failed to load');
+        }
+
+        // Set up event listener for month selection
         monthsSelect.addEventListener('change', loadTrend);
 
+        // Load initial trend
         await loadTrend();
       } catch (error) {
         console.error('Failed to initialise statistics page:', error);
-        setStatus(`Unable to load borough list: ${error.message}`, true);
+        setStatus(`Error: ${error.message}`, true);
       }
     };
 
+    // Start initialization
     init();
   });
 })();
