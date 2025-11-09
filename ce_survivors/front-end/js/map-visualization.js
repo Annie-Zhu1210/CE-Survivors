@@ -5,15 +5,17 @@
 (function () {
   const DEFAULT_CATEGORY = 'all-crime';
   const COLOR_SCALE = {
-    high: '#d94141', // red
-    medium: '#f6c344', // yellow
-    low: '#4caf50', // green
-    unknown: '#d1d9e6'
+    high: '#d94141',      // red - 4000+
+    medium: '#ff8c42',    // orange - 2500-3999
+    low: '#f6c344',       // yellow - 1000-2499
+    lowest: '#4caf50',    // green - < 1000
+    unknown: '#d1d9e6'    // grey - no data
   };
 
   const LEGEND_THRESHOLDS = {
-    high: 5000,
-    medium: 3000
+    high: 4000,
+    medium: 2500,
+    low: 1000
   };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -43,7 +45,8 @@
       if (typeof value !== 'number' || Number.isNaN(value)) return 'unknown';
       if (value >= LEGEND_THRESHOLDS.high) return 'high';
       if (value >= LEGEND_THRESHOLDS.medium) return 'medium';
-      return 'low';
+      if (value >= LEGEND_THRESHOLDS.low) return 'low';
+      return 'lowest';
     };
 
     const colorForValue = (value) => COLOR_SCALE[classifyValue(value)];

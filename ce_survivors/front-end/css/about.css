@@ -310,10 +310,14 @@ footer {
 }
 
 .medium-crime {
-  background: #f59e0b;
+  background: #f5970b;
 }
 
 .low-crime {
+  background: #efc10b;
+}
+
+.lowest-crime {
   background: #16a34a;
 }
 

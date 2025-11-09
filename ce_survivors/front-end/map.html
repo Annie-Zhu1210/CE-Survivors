@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<title>Map Page - SafeCity London</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/map.css">
-<link rel="stylesheet" href="css/home.css">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Map Page - SafeCity London</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/map.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
@@ -20,26 +23,28 @@
       <div id="londonMap" class="map-svg-wrapper" aria-label="London borough crime map"></div>
       <div class="map-legend" aria-hidden="true">
         <span class="legend-label">Legend</span>
-        <span class="legend-item"><span class="legend-swatch legend-low"></span>&lt; 3000</span>
-        <span class="legend-item"><span class="legend-swatch legend-medium"></span>3000-4999</span>
-        <span class="legend-item"><span class="legend-swatch legend-high"></span>&gt;= 5000</span>
+        <span class="legend-item"><span class="legend-swatch legend-lowest"></span>&lt; 1000</span>
+        <span class="legend-item"><span class="legend-swatch legend-low"></span>1000-2499</span>
+        <span class="legend-item"><span class="legend-swatch legend-medium"></span>2500-3999</span>
+        <span class="legend-item"><span class="legend-swatch legend-high"></span>&gt;= 4000</span>
         <span class="legend-item"><span class="legend-swatch legend-unknown"></span>No data</span>
       </div>
       <p class="map-hint">Click or press Enter on a borough to open its detailed statistics page.</p>
     </section>
 
     <aside class="info-box">
-      <h3>Top 5 Boroughs (Latest Month)</h3>
+      <h3>Top 5 Boroughs (Latest Available Month)</h3>
       <ol id="mapTopList" class="map-top-list">
         <li>Loading...</li>
       </ol>
       <div class="info-divider"></div>
       <h4>How colours are assigned</h4>
       <ul class="legend-explainer">
-        <li><span class="legend-swatch legend-high"></span>Higher than <strong>5000</strong> reported crimes</li>
-        <li><span class="legend-swatch legend-medium"></span>Between <strong>3000 and 4999</strong></li>
-        <li><span class="legend-swatch legend-low"></span>Lower than <strong>3000</strong></li>
-        <li><span class="legend-swatch legend-unknown"></span>No recent data returned</li>
+        <li><span class="legend-swatch legend-high"></span><strong>Red:</strong> 4000 or more reported crimes</li>
+        <li><span class="legend-swatch legend-medium"></span><strong>Orange:</strong> Between 2500 and 3999 crimes</li>
+        <li><span class="legend-swatch legend-low"></span><strong>Yellow:</strong> Between 1000 and 2499 crimes</li>
+        <li><span class="legend-swatch legend-lowest"></span><strong>Green:</strong> Less than 1000 crimes</li>
+        <li><span class="legend-swatch legend-unknown"></span><strong>Grey:</strong> No data available</li>
       </ul>
     </aside>
   </main>

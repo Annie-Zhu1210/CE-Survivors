@@ -88,8 +88,10 @@
     border: 1px solid rgba(0,0,0,0.15);
 }
 
-.legend-low { background: #4caf50; }
-.legend-medium { background: #f6c344; }
+/* An updated colouring scheme for boroughs on the map (in the Map Page)  */
+.legend-lowest { background: #4caf50; }
+.legend-low { background: #f6c344; }
+.legend-medium { background: #ff8c42; }
 .legend-high { background: #d94141; }
 .legend-unknown { background: #d1d9e6; }
 
