@@ -29,7 +29,6 @@
       return;
     }
 
-    // Update page title
     if (titleEl) {
       titleEl.textContent = `${currentBorough} - Crime Statistics`;
     }
@@ -173,7 +172,7 @@
         
         const missingCount = dataPoints.filter(value => value === null).length;
 
-        // Reverse to show oldest to newest (left to right)
+        // Show oldest to newest from left to right
         const labelsAscending = [...labels].reverse();
         const dataAscending = [...dataPoints].reverse();
 
@@ -225,7 +224,7 @@
       }
     };
 
-    // Start initialization
+    // Start initialisation
     init();
   });
 })();

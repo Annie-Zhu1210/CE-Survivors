@@ -1,0 +1,266 @@
+/* statistics-explorer.css - Styles for Crime Statistics Explorer page */
+
+.stats-explorer-container {
+  padding: 28px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.stats-explorer-panel {
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+
+.stats-header {
+  margin-bottom: 32px;
+}
+
+.stats-header h1 {
+  font-size: 32px;
+  color: var(--brand);
+  margin-bottom: 10px;
+}
+
+.stats-header p {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+/* Two-column layout */
+.explorer-layout {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+/* Left side: Map selection */
+.map-selection-area {
+  background: #f6f7fb;
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid #e4e7ef;
+}
+
+.map-selection-area h3 {
+  font-size: 18px;
+  color: var(--brand);
+  margin-bottom: 12px;
+}
+
+.explorer-map-wrapper {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.explorer-map-svg {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+}
+
+.explorer-borough-path {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  stroke: #ffffff;
+  stroke-width: 1;
+}
+
+.explorer-borough-path:hover {
+  stroke-width: 2;
+  filter: brightness(1.1);
+}
+
+.explorer-borough-path.selected {
+  stroke: #014f86;
+  stroke-width: 2.5;
+  filter: brightness(1.2);
+}
+
+.explorer-borough-path:focus {
+  outline: 3px solid #014f86;
+  outline-offset: 2px;
+}
+
+.map-hint-small {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Right side: Controls and chart */
+.chart-controls-area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stats-controls {
+  background: #f6f7fb;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.control-row label {
+  font-weight: 600;
+  color: var(--brand);
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.control-row input,
+.control-row select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e4e7ef;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.control-row input:focus,
+.control-row select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.control-row input[readonly] {
+  background: #e9eef5;
+  cursor: default;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.save-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #014f86 0%, #0077b6 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(1, 79, 134, 0.3);
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(1, 79, 134, 0.4);
+}
+
+.save-btn:active {
+  transform: translateY(0);
+}
+
+.save-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-icon {
+  font-size: 20px;
+}
+
+.chart-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 2px solid #e4e7ef;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-wrapper canvas {
+  max-height: 400px;
+}
+
+.stats-note {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.stats-note a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.stats-note a:hover {
+  text-decoration: underline;
+}
+
+.map-status {
+  font-size: 14px;
+  color: var(--accent);
+  padding: 10px;
+  text-align: center;
+}
+
+.map-status.error {
+  color: #d94141;
+  background: #fee;
+  border-radius: 6px;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .explorer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-selection-area {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-explorer-container {
+    padding: 16px;
+  }
+
+  .stats-explorer-panel {
+    padding: 20px;
+  }
+
+  .stats-header h1 {
+    font-size: 24px;
+  }
+
+  .explorer-map-wrapper {
+    min-height: 280px;
+  }
+
+  .chart-wrapper {
+    padding: 16px;
+    min-height: 300px;
+  }
+}

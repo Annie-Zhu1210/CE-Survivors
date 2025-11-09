@@ -2,45 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Borough Statistics - SafeCity London</title>
+  <title>Crime Statistics Explorer - SafeCity London</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/map.css">
+  <link rel="stylesheet" href="/css/statistics-explorer.css">
   <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-  <!-- Header will be injected by nav.js -->
   <div id="header"></div>
 
-  <main class="stats-container">
-    <section class="stats-panel">
+  <main class="stats-explorer-container">
+    <section class="stats-explorer-panel">
       <header class="stats-header">
-        <h1 id="boroughTitle">Borough Statistics</h1>
-        <p>Crime trend analysis for the selected borough based on UK Police street-level data.</p>
+        <h1>Crime Statistics Explorer</h1>
+        <p>Customize your crime trend analysis by selecting a borough on the map and choosing a crime type.</p>
       </header>
 
-      <form class="stats-controls" id="trendControls">
-        <label>
-          Time Period
-          <select id="trendMonths" aria-label="Number of months">
-            <option value="6">Last 6 Months</option>
-            <option value="12" selected>Last 12 Months</option>
-            <option value="18">Last 18 Months</option>
-            <option value="24">Last 24 Months</option>
-          </select>
-        </label>
-      </form>
+      <div class="explorer-layout">
+        <!-- An interactive map on the left hand side to select boroughs-->
+        <div class="map-selection-area">
+          <h3>Select a Borough</h3>
+          <div id="explorerMapStatus" class="map-status" role="status" aria-live="polite">Loading borough map...</div>
+          <div id="explorerMap" class="explorer-map-wrapper" aria-label="Borough selection map"></div>
+          <p class="map-hint-small">Click on a borough to select it</p>
+        </div>
 
-      <div id="trendStatus" class="map-status" role="status" aria-live="polite">Loading crime statistics...</div>
+        <!-- Drop-down menus and the line chart will locate on the right hand side -->
+        <div class="chart-controls-area">
+          <form class="stats-controls" id="explorerControls">
+            <div class="control-row">
+              <label>
+                Selected Borough
+                <input type="text" id="selectedBoroughDisplay" readonly value="No borough selected">
+              </label>
+            </div>
+            
+            <div class="control-row">
+              <label>
+                Crime Type
+                <select id="crimeTypeSelect" aria-label="Crime type">
+                  <option value="all-crime">All Crime</option>
+                  <option value="anti-social-behaviour">Anti-Social Behaviour</option>
+                  <option value="bicycle-theft">Bicycle Theft</option>
+                  <option value="burglary">Burglary</option>
+                  <option value="criminal-damage-arson">Criminal Damage & Arson</option>
+                  <option value="drugs">Drugs</option>
+                  <option value="other-theft">Other Theft</option>
+                  <option value="possession-of-weapons">Possession of Weapons</option>
+                  <option value="public-order">Public Order</option>
+                  <option value="robbery">Robbery</option>
+                  <option value="shoplifting">Shoplifting</option>
+                  <option value="theft-from-the-person">Theft from the Person</option>
+                  <option value="vehicle-crime">Vehicle Crime</option>
+                  <option value="violent-crime">Violent Crime</option>
+                  <option value="other-crime">Other Crime</option>
+                </select>
+              </label>
+            </div>
 
-      <div class="chart-wrapper">
-        <canvas id="trendChart" aria-label="Monthly crime totals line chart"></canvas>
+            <div class="control-row">
+              <label>
+                Time Period
+                <select id="trendMonths" aria-label="Number of months">
+                  <option value="6">Last 6 Months</option>
+                  <option value="12" selected>Last 12 Months</option>
+                  <option value="18">Last 18 Months</option>
+                  <option value="24">Last 24 Months</option>
+                </select>
+              </label>
+            </div>
+
+            <button type="button" id="saveBtn" class="save-btn">
+              <span class="btn-icon">📊</span> Save & Generate Chart
+            </button>
+          </form>
+
+          <div id="trendStatus" class="map-status" role="status" aria-live="polite"></div>
+
+          <div class="chart-wrapper">
+            <canvas id="trendChart" aria-label="Monthly crime totals line chart"></canvas>
+          </div>
+
+          <p class="stats-note">
+            Source: <a href="https://data.police.uk/" target="_blank" rel="noopener">data.police.uk</a>. 
+            Counts represent the number of reported crimes for the selected borough and crime type.
+          </p>
+        </div>
       </div>
-
-      <p class="stats-note">
-        Source: <a href="https://data.police.uk/" target="_blank" rel="noopener">data.police.uk</a>. 
-        Counts represent the number of reported crimes for this borough's geographic boundary.
-      </p>
 
       <div style="margin-top: 2rem; text-align: center;">
         <a href="/map.html" class="btn" style="display: inline-block; padding: 12px 24px; background: #014f86; color: white; text-decoration: none; border-radius: 8px;">
@@ -51,7 +100,9 @@
   </main>
 
   <script src="/js/nav.js" defer></script>
+  <script src="https://d3js.org/d3.v7.min.js" defer></script>
+  <script src="https://unpkg.com/topojson-client@3" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script src="/js/statistics.js" defer></script>
+  <script src="/js/statistics-explorer.js" defer></script>
 </body>
 </html>
