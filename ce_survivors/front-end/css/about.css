@@ -223,3 +223,116 @@ footer {
     padding: 30px 15px;
   }
 }
+
+
+/* User Story Section Styles */
+.story-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.story-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.story-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.story-number {
+  background: #2c5aa0;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.story-content h3 {
+  color: #2c5aa0;
+  margin-bottom: 0.5rem;
+}
+
+.story-data {
+  background: #f1f5f9;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.story-data ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.story-data li {
+  margin-bottom: 0.25rem;
+}
+
+.color-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.high-crime {
+  background: #dc2626;
+}
+
+.medium-crime {
+  background: #f59e0b;
+}
+
+.low-crime {
+  background: #16a34a;
+}
+
+.no-data {
+  background: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .story-step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .story-number {
+    align-self: center;
+  }
+  
+  .color-legend {
+    align-items: center;
+  }
+}
