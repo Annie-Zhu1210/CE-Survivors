@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="/css/map.css">
   <link rel="stylesheet" href="/css/statistics-explorer.css">
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
 </head>
 <body>
   <div id="header"></div>
@@ -20,15 +24,24 @@
       </header>
 
       <div class="explorer-layout">
-        <!-- An interactive map on the left hand side to select boroughs-->
+        <!-- Borough selection map -->
         <div class="map-selection-area">
           <h3>Select a Borough</h3>
           <div id="explorerMapStatus" class="map-status" role="status" aria-live="polite">Loading borough map...</div>
           <div id="explorerMap" class="explorer-map-wrapper" aria-label="Borough selection map"></div>
           <p class="map-hint-small">Click on a borough to select it</p>
+
+          <!-- Street map -->
+          <!-- <h4>Street Map</h4>
+          <div id="streetMap" class="explorer-map-wrapper" aria-label="Static street map" style="min-height: 250px;">
+            <p style="text-align:center; color:#888;">Select a borough to see street map</p>
+          </div> -->
+
+<div id="streetMap" class="explorer-map-wrapper" style="height: 400px;"></div>
+
         </div>
 
-        <!-- Drop-down menus and the line chart will locate on the right hand side -->
+        <!-- Controls and chart -->
         <div class="chart-controls-area">
           <form class="stats-controls" id="explorerControls">
             <div class="control-row">
@@ -37,7 +50,16 @@
                 <input type="text" id="selectedBoroughDisplay" readonly value="No borough selected">
               </label>
             </div>
-            
+
+            <!-- <div class="control-row">
+              <label>
+                Street
+                <select id="streetSelect" aria-label="Select street">
+                  <option value="">All Streets</option>
+                </select>
+              </label>
+            </div> -->
+
             <div class="control-row">
               <label>
                 Crime Type
@@ -99,10 +121,13 @@
     </section>
   </main>
 
+  <!-- Scripts -->
   <script src="/js/nav.js" defer></script>
   <script src="https://d3js.org/d3.v7.min.js" defer></script>
   <script src="https://unpkg.com/topojson-client@3" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
   <script src="/js/statistics-explorer.js" defer></script>
+  <!-- <script src="/js/street-map.js" defer></script> -->
+<script src="/js/street-london-map.js" defer></script>
 </body>
 </html>
