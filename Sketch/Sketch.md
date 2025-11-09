@@ -24,7 +24,7 @@ When the cursor moved to a borough, there would be a pop-up information box show
 
 The About Page was expected to introduce the purpose of building this website and team members.
 
-<img src="Sketch/AboutPage.png" width="500">
+<img src="/Sketch/AboutPage.png" width="500">
 
 ## The More Page
 
@@ -34,4 +34,4 @@ Users could select the location they want to explore, and could filter the types
 
 ***(Note: Only the borough-level crime data has been realised by the end of the submission deadline. The street-level data will be updated in the future.)***
 
-<img src="Sketch/MorePage.PNG" width="500">
+<img src="/Sketch/MorePage.PNG" width="500">
