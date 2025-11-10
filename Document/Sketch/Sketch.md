@@ -10,7 +10,7 @@ The website was expected to contain some interactive maps and customised crime d
 
 From the initial design, there would be four main pages with a navigation bar at the top: the Home Page, the Map Page, the About Page and the More Page.
 
-<img src="/Sketch/HomePage.png" width="500">
+<img src="/Document/Sketch/HomePage.png" width="500">
 
 ## The Map Page
 
@@ -18,13 +18,13 @@ In the Map Page, it was expected to have an interactive map of London with borou
 
 When the cursor moved to a borough, there would be a pop-up information box showing some basic information.
 
-<img src="/Sketch/MapPage.png" width="500">
+<img src="/Document/Sketch/MapPage.png" width="500">
 
 ## The About Page
 
 The About Page was expected to introduce the purpose of building this website and team members.
 
-<img src="/Sketch/AboutPage.png" width="500">
+<img src="/Document/Sketch/AboutPage.png" width="500">
 
 ## The More Page
 
@@ -34,4 +34,4 @@ Users could select the location they want to explore, and could filter the types
 
 ***(Note: Only the borough-level crime data has been realised by the end of the submission deadline. The street-level data will be updated in the future.)***
 
-<img src="/Sketch/MorePage.PNG" width="500">
+<img src="/Document/Sketch/MorePage.PNG" width="500">
