@@ -91,24 +91,6 @@ Technical evolution documentation
 
 <img src="Document/journeypage.jpg" alt="journeypage" width="600" height="420">
 
-## Key Files（need edited）
-### Backend Files
-server.js - Main HTTP server with API endpoints
-
-db.js - MySQL database configuration and queries
-
-package.json - Project dependencies
-
-### Frontend Files
-style.css - Global styles and header
-
-home.css - Homepage specific styles
-
-map.css - Map page styles
-
-carousel.js - Borough data carousel
-
-map-visualization.js - D3 map rendering
 
 ## Data Source
 All crime data is sourced from the UK Police Official API, ensuring data accuracy and timeliness. Data is automatically updated every 15 minutes.
@@ -132,13 +114,6 @@ If you find bugs or have feature suggestions, please submit them via GitHub Issu
 
 
 <div align="center">
-https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
-https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
-https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
-https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
-
-https://img.shields.io/github/stars/your-username/safecity-london?style=social
-https://img.shields.io/github/forks/your-username/safecity-london?style=social
 
 Made with ❤️ for Londoners' Safety
 
