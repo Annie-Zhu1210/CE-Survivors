@@ -140,27 +140,13 @@ User tutorial video
 
 Technical architecture explanation video
 
-
-GET /api/borough-latest
-Description: Latest crime counts for all boroughs
-
-GET /api/boroughs/crime-totals
-Description: Crime totals with category filtering
-Parameters: 
-  - category (string): Crime category, defaults to 'all-crime'
-  - date (string): Specific month in YYYY-MM format
-
-GET /api/boroughs/{id}/trend
-Description: Crime trend data for specific borough
-Parameters:
-  - months (number): Number of months, defaults to 12
-  - category (string): Crime category
-
-GET /api/crime-months
-Description: Available crime data months
-
-GET /api/crime-types  
-Description: List of crime categories
+## API Endpoints
+Endpoint	Method	Description	Query Parameters
+/api/borough-latest	GET	Latest crime counts for all boroughs	-
+/api/boroughs/crime-totals	GET	Crime totals with category filtering	category, date
+/api/boroughs/{id}/trend	GET	Crime trend data for specific borough	months, category
+/api/crime-months	GET	Available crime data months	-
+/api/crime-types	GET	List of crime categories	-
 
 
 
@@ -180,4 +166,4 @@ https://img.shields.io/github/forks/your-username/safecity-london?style=social
 
 Made with ❤️ for Londoners' Safety
 
-</div> ```
+</div> 
