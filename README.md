@@ -2,7 +2,7 @@
 
 SafeCity London is a public safety information platform based on London crime data, designed to help residents and visitors better understand urban safety conditions through visualization and interactive analysis.
 
-<img src="Document/homepage.jpg" alt="home page" width="600" height="420">
+<img src="Document/page_pic/homepage.jpg" alt="home page" width="600" height="420">
 
 ## Project Overview
 
@@ -35,11 +35,12 @@ Through color-coded maps and interactive charts, users can:
 
 ## Technical Architecture
 
-- **Frontend**: HTML5, CSS3, JavaScript
+- **Frontend**: HTML, CSS, JavaScript
+- **Visualization**: D3.js, TopoJSON, chart.js
 - **Backend**: Node.js
+- **Data Managment**: MySQL, db.js, jquery
 - **Data Source**: [UK Police Official API](https://data.police.uk/api/)
-- **Visualization**: D3.js, TopoJSON
-- **Maps**: SVG vector graphics
+- **Maps**: SVG vector graphics, leaflet
 
 ## Quick Start
 
@@ -71,7 +72,7 @@ Color-coded safety level display
 
 Click boroughs for detailed information
 
-<img src="Document/mappage.jpg" alt="mappage" width="600" height="420">
+<img src="Document/page_pic/mappage.jpg" alt="mappage" width="600" height="420">
 
 ### About Page (about.html)
 Project background and team introduction
@@ -80,7 +81,7 @@ Detailed feature descriptions
 
 User guide and instructions
 
-<img src="Document/aboutpage.jpg" alt="aboutpage" width="600" height="420">
+<img src="Document/page_pic/aboutpage.jpg" alt="aboutpage" width="600" height="420">
 
 ### Journal Page (journal.html)
 Project development history
@@ -89,7 +90,7 @@ Version update records
 
 Technical evolution documentation
 
-<img src="Document/journeypage.jpg" alt="journeypage" width="600" height="420">
+<img src="Document/page_pic/journeypage.jpg" alt="journeypage" width="600" height="420">
 
 
 ## Data Source
