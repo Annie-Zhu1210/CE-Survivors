@@ -26,6 +26,9 @@ Include a section that gives intructions on how to install the app or run it in 
 ##  Contact Details
 
 Annie Zhu GitHub: Annie-Zhu1210 zcakxz4@ucl.ac.uk
+
 Xinyi Zhang GitHub: CynthiaZHANGovo ucfnxz3@ucl.ac.uk
+
 Yifei Huang GitHub: Freyafff666 ucfnuaw@ucl.ac.uk
+
 Ethan Taylor GitHub: ethan-se ethan.taylor.20@ucl.ac.uk
