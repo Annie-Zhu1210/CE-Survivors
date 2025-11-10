@@ -2,15 +2,18 @@
 
 SafeCity London is a public safety information platform based on London crime data, designed to help residents and visitors better understand urban safety conditions through visualization and interactive analysis.
 
-![SafeCity London Homepage](Document/homepage.png)
-
+<img src="Document/homepage.jpg" alt="home page" width="600" height="420">
 
 ## Project Overview
 
-SafeCity London was created by a team of London students concerned about urban safety. The platform transforms complex police crime data into clear, intuitive visual information. Through color-coded maps and interactive charts, users can:
+SafeCity London was created by a team of London students concerned about urban safety. The platform transforms complex police crime data into clear, intuitive visual information. 
+
+Through color-coded maps and interactive charts, users can:
 
 - Quickly view safety levels across London boroughs
+  
 - Conduct in-depth analysis of crime trends in specific areas
+  
 - Customize safety queries based on personal needs
 
 ## Features
@@ -49,66 +52,54 @@ SafeCity London was created by a team of London students concerned about urban s
    node back-end/server.js
 4.Open http://localhost:3000 in your browser
 
-### Method 2: Direct Website Access
+### Method 2: Direct Website Access (edited)
 [Website link to be added]   
 
-## Project Structure
-ce_survivors/
-├── back-end/           # Backend server code
-│   ├── server.js      # Main server file
-│   ├── db.js          # Database configuration
-│   └── package.json   # Dependencies configuration
-├── front-end/          # Frontend static files
-│   ├── css/           # Stylesheets
-│   ├── js/            # JavaScript scripts
-│   ├── images/        # Image resources
-│   └── *.html         # Page files
-└── README.md          # Project documentation
 
 ## Pages Overview
-## Home Page (index.html)
+### Home Page (index.html)
 Borough crime data carousel display
 
 Quick access to map page
 
 Responsive card layout design
 
-## Map Page (map.html)
+### Map Page (map.html)
 London borough crime heatmap
 
 Color-coded safety level display
 
 Click boroughs for detailed information
 
-![SafeCity London Mappage](Document/mappage.png)
+<img src="Document/mappage.jpg" alt="mappage" width="600" height="420">
 
-## About Page (about.html)
+### About Page (about.html)
 Project background and team introduction
 
 Detailed feature descriptions
 
 User guide and instructions
 
-![SafeCity London Aboutpage](Document/aboutpage.png)
+<img src="Document/aboutpage.jpg" alt="aboutpage" width="600" height="420">
 
-## Journal Page (journal.html)
+### Journal Page (journal.html)
 Project development history
 
 Version update records
 
 Technical evolution documentation
 
-![SafeCity London Journeypage](Document/journeypage.png)
+<img src="Document/journeypage.jpg" alt="journeypage" width="600" height="420">
 
 ## Key Files（need edited）
-## Backend Files
+### Backend Files
 server.js - Main HTTP server with API endpoints
 
 db.js - MySQL database configuration and queries
 
 package.json - Project dependencies
 
-## Frontend Files
+### Frontend Files
 style.css - Global styles and header
 
 home.css - Homepage specific styles
