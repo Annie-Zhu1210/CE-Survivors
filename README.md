@@ -2,7 +2,8 @@
 
 SafeCity London is a public safety information platform based on London crime data, designed to help residents and visitors better understand urban safety conditions through visualization and interactive analysis.
 
-![SafeCity London Homepage Example](images/logo.jpg "SafeCity London Homepage Example")
+![Uploading homepage-demo.png…]()
+
 
 ## Project Overview
 
