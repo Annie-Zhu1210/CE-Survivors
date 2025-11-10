@@ -2,7 +2,7 @@
 
 SafeCity London is a public safety information platform based on London crime data, designed to help residents and visitors better understand urban safety conditions through visualization and interactive analysis.
 
-![SafeCity London Homepage](Document/homepage-screenshot.png)
+![SafeCity London Homepage](Document/homepage.png)
 
 
 ## Project Overview
@@ -80,6 +80,8 @@ Color-coded safety level display
 
 Click boroughs for detailed information
 
+![SafeCity London Mappage](Document/mappage.png)
+
 ## About Page (about.html)
 Project background and team introduction
 
@@ -87,12 +89,16 @@ Detailed feature descriptions
 
 User guide and instructions
 
+![SafeCity London Aboutpage](Document/aboutpage.png)
+
 ## Journal Page (journal.html)
 Project development history
 
 Version update records
 
 Technical evolution documentation
+
+![SafeCity London Journeypage](Document/journeypage.png)
 
 ## Key Files（need edited）
 ## Backend Files
@@ -125,29 +131,7 @@ Xinyi Zhang - GitHub: CynthiaZHANGovo | ucfnxz3@ucl.ac.uk
 
 Yifei Huang - GitHub: Freyafff666 | ucfnuaw@ucl.ac.uk
 
-## Media Resources
-
-## Images to be Uploaded
-Website screenshots
-
-Team photos
-
-Data visualization examples
-
-## Videos to be Uploaded
-Website feature demonstration video
-
-User tutorial video
-
-Technical architecture explanation video
-
-## API Endpoints
-Endpoint	Method	Description	Query Parameters
-/api/borough-latest	GET	Latest crime counts for all boroughs	-
-/api/boroughs/crime-totals	GET	Crime totals with category filtering	category, date
-/api/boroughs/{id}/trend	GET	Crime trend data for specific borough	months, category
-/api/crime-months	GET	Available crime data months	-
-/api/crime-types	GET	List of crime categories	-
+## Videos Resources (edited）
 
 
 
