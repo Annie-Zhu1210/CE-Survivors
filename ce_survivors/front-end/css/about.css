@@ -198,33 +198,6 @@ footer {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .about-container {
-    padding: 1rem;
-  }
-  
-  .section {
-    padding: 25px;
-    margin-bottom: 25px;
-  }
-  
-  .feature-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .team-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-  }
-  
-  .cta-section {
-    padding: 30px 15px;
-  }
-}
-
-
 /* User Story Section Styles */
 .story-section {
   background: #f8f9fa;
@@ -325,8 +298,57 @@ footer {
   background: #6b7280;
 }
 
-/* Responsive Design */
+/* Crime Types Grid Styles */
+.crime-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.crime-type-tag {
+  background: #e8f4fd;
+  border: 1px solid #2c5aa0;
+  color: #2c5aa0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.crime-type-tag:hover {
+  background: #2c5aa0;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
+  .about-container {
+    padding: 1rem;
+  }
+  
+  .section {
+    padding: 25px;
+    margin-bottom: 25px;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+  
+  .cta-section {
+    padding: 30px 15px;
+  }
+  
   .story-step {
     flex-direction: column;
     text-align: center;
@@ -338,5 +360,14 @@ footer {
   
   .color-legend {
     align-items: center;
+  }
+  
+  .crime-types-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+  
+  .crime-type-tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
   }
 }
