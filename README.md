@@ -117,7 +117,14 @@ Xinyi Zhang - GitHub: CynthiaZHANGovo | ucfnxz3@ucl.ac.uk
 Yifei Huang - GitHub: Freyafff666 | ucfnuaw@ucl.ac.uk
 
 ## Videos Resources (edited）
+<div align="center">
 
+
+[![SafeCity London Story](https://img.youtube.com/vi/IAvDoEs-CeU/0.jpg)](https://www.youtube.com/watch?v=IAvDoEs-CeU)
+
+<small>Click to watch story demo </small>
+
+</div>
 
 
 ## Maintenance & Support
