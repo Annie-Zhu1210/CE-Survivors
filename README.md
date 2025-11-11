@@ -44,7 +44,7 @@ Through color-coded maps and interactive charts, users can:
 
 ## Quick Start
 
-### Method 1: Run Node Server (Recommended for Development)
+### Run Node Server 
 
 1. Ensure Node.js is installed
 2. Navigate to the `ce_survivors` folder in terminal
@@ -52,9 +52,6 @@ Through color-coded maps and interactive charts, users can:
    ```bash
    node back-end/server.js
 4.Open http://localhost:3000 in your browser
-
-### Method 2: Direct Website Access (edited)
-[Website link to be added]   
 
 
 ## Pages Overview
