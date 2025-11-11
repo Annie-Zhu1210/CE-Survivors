@@ -74,6 +74,18 @@ Click boroughs for detailed information
 
 <img src="Document/page_pic/mappage.jpg" alt="mappage" width="600" height="420">
 
+### Statistics Page (Statistics.html)
+Interactive crime trend analysis platform
+
+Custom borough selection with map interface
+
+Multi-dimensional filtering by crime type and time period
+
+Real-time interactive line charts showing crime trends
+
+<img src="Document/page_pic/statisticpage1.jpg" alt="statisticpage1" width="600" height="420">
+<img src="Document/page_pic/statisticpage2.jpg" alt="statisticpage2" width="600" height="420">
+
 ### About Page (about.html)
 Project background and team introduction
 
