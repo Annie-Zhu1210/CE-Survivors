@@ -114,6 +114,20 @@ Xinyi Zhang - GitHub: CynthiaZHANGovo | ucfnxz3@ucl.ac.uk
 Yifei Huang - GitHub: Freyafff666 | ucfnuaw@ucl.ac.uk
 
 ## Videos Resources 
+
+🎥 Tutorial Video: How to Use the London Borough Crime Visualisation Website
+
+This short tutorial introduces the main functionalities of the website, including the interactive map, borough-level crime summaries, and customised trend visualisations. It demonstrates how users can explore data across different boroughs and access more detailed analytical pages.
+
+<p align="center">
+  <a href="https://youtu.be/bAqN3_qY7IU?si=-z_I0crU7c-tChmW" target="_blank">
+    <img src="https://img.youtube.com/vi/bAqN3_qY7IU/0.jpg" alt="Tutorial Video" width="60%">
+  </a>
+</p>
+
+
+🎥 Story demo video:
+
 <div align="center">
 
 
