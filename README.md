@@ -83,8 +83,7 @@ Multi-dimensional filtering by crime type and time period
 
 Real-time interactive line charts showing crime trends
 
-<img src="Document/page_pic/statisticpage1.jpg" alt="statisticpage1" width="600" height="420">
-<img src="Document/page_pic/statisticpage2.jpg" alt="statisticpage2" width="600" height="420">
+<img src="Document/page_pic/statisticpage1.png" alt="statisticpage1" width="500" height="320"><img src="Document/page_pic/statisticpage2.png" alt="statisticpage2" width="500" height="320">
 
 ### About Page (about.html)
 Project background and team introduction
