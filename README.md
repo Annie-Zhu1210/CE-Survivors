@@ -116,7 +116,7 @@ Xinyi Zhang - GitHub: CynthiaZHANGovo | ucfnxz3@ucl.ac.uk
 
 Yifei Huang - GitHub: Freyafff666 | ucfnuaw@ucl.ac.uk
 
-## Videos Resources (edited）
+## Videos Resources 
 <div align="center">
 
 
